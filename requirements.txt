@@ -1,0 +1,17 @@
+pandas
+numpy
+scikit-learn
+lightgbm
+xgboost
+shap
+matplotlib
+seaborn
+geopandas
+folium
+streamlit
+streamlit-folium
+jupyter
+openpyxl
+rasterio
+rasterstats
+python-docx

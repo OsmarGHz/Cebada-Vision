@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+data/raw/
+data/external/
+*.pyc
+.env
+DATASET_RETO_AGRO_2026/
+DataSet.zip
