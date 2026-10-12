@@ -41,12 +41,14 @@ Desde la raíz del repo:
 | 2 | `src/auditoria_datos.py` | CSV de rendimiento, shapefile, BASICO, PRO | `auditoria_union_4fuentes.csv` |
 | 3 | `src/tabla_pro.py` | PRO | `variables_pro_abr_oct_2025.csv` |
 | 4 | `src/clima_ciclo.py` | `clima_mensual_parcela.csv` (paso 1) | `clima_ciclo_2025.csv` |
+| 5 | `src/exportar_app.py` | pasos 1–4 + dataset | `data/app/` (archivos que lee la app) |
 
 ```bash
 .venv/Scripts/python.exe src/extraer_raster.py
 .venv/Scripts/python.exe src/auditoria_datos.py
 .venv/Scripts/python.exe src/tabla_pro.py
 .venv/Scripts/python.exe src/clima_ciclo.py
+.venv/Scripts/python.exe src/exportar_app.py
 ```
 
 `tabla_pro.py` acepta opcionalmente la ruta a `particiones_cv.csv` para imprimir el RMSE del
@@ -64,7 +66,18 @@ modelo de media por fold.
 Unir con `ID_area_rendimiento_70_30_Reto_AgroCebada.csv` por `ID_POLIGONO` (el shapefile trae el
 campo truncado como `ID_POLIGON`; los scripts lo renombran).
 
-## 5. Estructura
+## 5. App
+
+La app web está en otro repositorio:
+[agrocebada-pagina](https://github.com/David54s/agrocebada-pagina). `src/exportar_app.py` genera
+lo que la app lee (`parcelas.geojson`, `modelo.json`, `series.json`, `predicciones.csv`) con el
+formato de su `docs/CONTRATO_DATOS.md`; se copian a `public/data/` de la app.
+
+El modelo del exportador es un **Ridge provisional** (índices de Planet + clima + relieve, RMSE
+de CV 0.551). Al tener el modelo final se cambia `VARIABLES` y `ajustar()` en el script; la app no
+cambia. `data/app/` no se versiona aquí: los archivos viven en el repo de la app.
+
+## 6. Estructura
 
 ```
 src/             scripts de datos, features y modelo
