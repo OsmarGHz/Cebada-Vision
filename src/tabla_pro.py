@@ -5,7 +5,8 @@ Salida:  data/processed/variables_pro_abr_oct_2025.csv (197 filas, una por ID_PO
 
 Por cada indice (ndvi, evi, lai, msavi) se toma la columna `<indice>_promedio` de cada captura
 (promedio del indice dentro del poligono) y se agrega en el tiempo por parcela con
-mean, std (ddof=1), max y min. Ademas `<indice>_n_obs` = capturas con valor no nulo.
+mean, std (ddof=1), max y min. Ademas `n_obs` = capturas con valor no nulo (igual para los
+cuatro indices porque sus nulos coinciden; se verifica abajo).
 
 Nulos: se OMITEN, no se rellenan. En PRO los indices vienen vacios exactamente cuando
 porcentaje_nubosidad == 100 (se verifica abajo); esas capturas se descartan con dropna y no hay
@@ -48,8 +49,9 @@ def construir_tabla_pro(pro):
     g = ventana.groupby("ID_POLIGONO")  # mean/std/max/min/count de pandas omiten NaN
     tabla = g[cols].agg(ESTADISTICOS)
     tabla.columns = [f"{c.removesuffix('_promedio')}_{s}" for c, s in tabla.columns]
-    for c in cols:
-        tabla[f"{c.removesuffix('_promedio')}_n_obs"] = g[c].count()
+    conteos = g[cols].count()
+    assert conteos.nunique(axis=1).eq(1).all(), "n_obs distinto entre indices"
+    tabla["n_obs"] = conteos.iloc[:, 0]
     tabla = tabla.reset_index()
 
     resumen = {
@@ -84,7 +86,7 @@ def main():
         print(f"  {k}: {v}")
     print(f"Filas: {len(tabla)}  Columnas: {tabla.shape[1]}")
     print(tabla.columns.tolist())
-    print(tabla[[f"{i}_n_obs" for i in INDICES]].describe().loc[["min", "50%", "max"]].to_string())
+    print(tabla["n_obs"].describe().loc[["min", "50%", "max"]].to_string())
 
     tabla.to_csv(OUT, index=False)
     print(f"Guardada en {OUT.relative_to(ROOT)}")

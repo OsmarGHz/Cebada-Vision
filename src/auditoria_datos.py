@@ -21,29 +21,26 @@ def cargar():
     ).rename(columns={"ID_POLIGON": "ID_POLIGONO"})  # dbf trunca nombre de campo a 10 caracteres
     basico = pd.read_csv(D / "Conjunto_datos_BASICO_AgroCebada2026.csv")
     pro = pd.read_csv(D / "Conjunto_datos_PRO_AgroCebada.csv")
-    clima = pd.read_csv(OUT / "clima_mensual_parcela.csv")
-    topo = pd.read_csv(OUT / "topografia_parcela.csv")
     for df, col in [(basico, "fecha_captura"), (pro, "fecha_captura")]:
         df["fecha"] = pd.to_datetime(df[col], format="%d/%m/%Y", dayfirst=True)
-    return y, shp, basico, pro, clima, topo
+    return y, shp, basico, pro
 
 
-def auditar_ids(y, shp, basico, pro, clima, topo):
+def auditar_ids(y, shp, basico, pro):
+    # clima y topografia no se auditan aqui: extraer_raster.py toma sus IDs del mismo
+    # shapefile, asi que coincidirian por construccion y la revision no probaria nada
     fuentes = {
         "ID_area_rendimiento (objetivo)": set(y["ID_POLIGONO"]),
         "Shapefile parcelas": set(shp["ID_POLIGONO"]),
         "BASICO (Sentinel/Landsat)": set(basico["ID_POLIGONO"]),
         "PRO (Planet)": set(pro["ID_POLIGONO"]),
-        "Clima (procesado)": set(clima["ID_POLIGONO"]),
-        "Topografia (procesada)": set(topo["ID_POLIGONO"]),
     }
     base = fuentes["ID_area_rendimiento (objetivo)"]
-    # una fila por ID (no por observacion); series largas (clima mensual, satelite) se
-    # comparan aparte porque repiten ID por diseno (una fila por fecha/mes)
+    # una fila por ID (no por observacion); series largas (satelite por fecha) se
+    # comparan aparte porque repiten ID por diseno (una fila por fecha)
     filas_por_id = {
         "ID_area_rendimiento (objetivo)": y,
         "Shapefile parcelas": shp,
-        "Topografia (procesada)": topo,
     }
     filas = []
     for nombre, ids in fuentes.items():
@@ -91,7 +88,7 @@ def prueba_union(y, shp, basico, pro):
 
 
 def main():
-    y, shp, basico, pro, clima, topo = cargar()
+    y, shp, basico, pro = cargar()
 
     print("== Fechas: rango y formato ==")
     for nombre, df in [("BASICO", basico), ("PRO", pro)]:
@@ -99,9 +96,9 @@ def main():
               f"nulos tras parseo: {df['fecha'].isna().sum()}")
 
     print("\n== Auditoria de IDs por fuente ==")
-    tabla_ids = auditar_ids(y, shp, basico, pro, clima, topo)
+    tabla_ids = auditar_ids(y, shp, basico, pro)
     print(tabla_ids.drop(columns=["faltan_vs_objetivo", "sobran_vs_objetivo"]).to_string(index=False))
-    print("(id_duplicado_indebido = None para tablas largas por diseno: BASICO/PRO por fecha, clima por mes)")
+    print("(id_duplicado_indebido = None para tablas largas por diseno: BASICO/PRO por fecha)")
     for _, r in tabla_ids.iterrows():
         if r["faltan_vs_objetivo"] or r["sobran_vs_objetivo"]:
             print(f"  {r['fuente']}: faltan={r['faltan_vs_objetivo']} sobran={r['sobran_vs_objetivo']}")

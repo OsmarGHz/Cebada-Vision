@@ -1,17 +1,24 @@
-pandas
-numpy
-scikit-learn
-lightgbm
-xgboost
-shap
-matplotlib
-seaborn
-geopandas
-folium
-streamlit
+# Python 3.13. Versiones fijadas = las del entorno donde se generaron los CSV de data/processed.
+
+# Datos (extraer_raster.py, auditoria_datos.py, tabla_pro.py, clima_ciclo.py)
+pandas==3.0.6
+numpy==2.5.3
+geopandas==1.1.4
+rasterio==1.5.1
+rasterstats==0.21.0
+
+# Modelo
+scikit-learn==1.9.1
+lightgbm==4.7.0
+xgboost==3.4.1
+shap==0.52.0
+
+# EDA, app y reporte
+matplotlib==3.11.2
+seaborn==0.13.2
+folium==0.20.0
+streamlit==1.64.0
 streamlit-folium
 jupyter
 openpyxl
-rasterio
-rasterstats
 python-docx
