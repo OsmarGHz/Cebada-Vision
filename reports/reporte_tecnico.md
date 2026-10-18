@@ -17,8 +17,8 @@ productores que venden su cosecha a comercializadoras y parafinancieras. Para el
 rendimiento por hectárea define al mismo tiempo cuánto ganan y si podrán pagar el crédito de avío
 con el que financiaron el ciclo.
 
-Saber cuánto va a rendir una parcela sin visitarla, y para todas las parcelas de una región, es
-un problema abierto con valor público directo. Los satélites lo hacen posible: Sentinel-2 pasa
+Estimar el rendimiento de una parcela sin visitarla, y hacerlo para todas las parcelas de una
+región, es un problema abierto con valor público directo. Los satélites lo hacen posible: Sentinel-2 pasa
 cada cinco días con píxeles de 10 m y constelaciones como Planet observan casi a diario con
 píxeles de 3 m. Los estudios recientes muestran que los modelos de aprendizaje automático que
 combinan estas series con clima y relieve explican buena parte de la variación del rendimiento en
@@ -30,9 +30,9 @@ El Reto AgroCebada 2026 plantea exactamente ese problema con datos reales: 197 p
 de temporal del ciclo abril–octubre de 2025 en Hidalgo, Tlaxcala y Puebla, con índices de
 vegetación de Sentinel-2, Landsat y Planet, precipitación y temperatura mensuales, elevación y
 pendiente. El rendimiento de grano (toneladas por hectárea) se conoce para 138 parcelas; el de las
-otras 59 lo guarda el comité para calificar las predicciones. Ese rendimiento viene, en la mayoría
-de los casos, del registro de compra de la comercializadora, no de una medición en campo, así que
-trae ruido y, en algunas zonas, está redondeado a medias toneladas.
+otras 59 lo resguarda el comité para calificar las predicciones. Ese rendimiento proviene, en la
+mayoría de los casos, del registro de compra de la comercializadora y no de una medición en campo,
+por lo que contiene ruido y, en algunas zonas, está redondeado a medias toneladas.
 
 Este trabajo presenta CebadaVision, una solución con tres partes. Primero, una tabla de variables
 por parcela que resume cómo se comportó cada índice durante el ciclo (cuándo emergió el cultivo,
@@ -47,7 +47,7 @@ explica cerca de dos tercios de la variación del rendimiento. Las tres zonas de
 distinto (alrededor de 4.5 t/ha en el este de Puebla, 3.0 en el suroeste de Tlaxcala y 3.3 en el
 norte de Hidalgo) y las parcelas vecinas comparten suelo, clima y manejo. Por eso el modelo usa de
 forma explícita la información espacial y mide lo que aportan los índices satelitales, el clima y
-el relieve *dentro* de esa estructura. Ese mismo marco es el que usamos para responder las tres
+el relieve *dentro* de esa estructura. Ese mismo marco se utiliza para responder las tres
 preguntas guía del reto.
 
 ## 2. Justificación [100–200 palabras]
@@ -88,17 +88,17 @@ con un error cuantificado.
 
 ## 4. Metodología [600–700 palabras]
 
-**Datos.** Usamos únicamente el dataset oficial: 197 polígonos (138 de entrenamiento y 59 por
+**Datos.** Se utilizó únicamente el dataset oficial: 197 polígonos (138 de entrenamiento y 59 por
 predecir), 47 804 observaciones de Planet (NDVI, EVI, LAI, MSAVI) de 2025, 107 666 de Sentinel-2 y
 Landsat de 2022 a 2025 (22 índices), rásteres mensuales de precipitación (CHIRPS) y de temperatura
 mínima y máxima a unos 5 km, y elevación y pendiente del Continuo de Elevaciones Mexicano. Una
 auditoría confirmó 197 identificadores únicos en todas las fuentes, la unión sin pérdidas entre
-shapefile y tablas, y el reparto 138/59. Trabajamos con el ciclo abril–octubre de 2025 (más
-noviembre, para ver el secado). Las observaciones con nubosidad del 100 % se descartaron porque
-traen los índices vacíos; no se rellenó ninguna. Landsat no aporta índices en 2025.
+shapefile y tablas, y el reparto 138/59. Se trabajó con el ciclo abril–octubre de 2025 (más
+noviembre, para capturar la senescencia). Las observaciones con nubosidad del 100 % se descartaron
+porque traen los índices vacíos; no se imputó ninguna. Landsat no aporta índices en 2025.
 
-**Variables.** Para cada parcela e índice tomamos la serie del promedio del polígono, la
-suavizamos con una mediana móvil de tres observaciones y calculamos: mediana de cada mes de abril
+**Variables.** Para cada parcela e índice se tomó la serie del promedio del polígono, se suavizó
+con una mediana móvil de tres observaciones y se calcularon: mediana de cada mes de abril
 a noviembre, medianas por ventana (mayo–junio, julio–septiembre, octubre–noviembre), valor y fecha
 del máximo, amplitud, área bajo la curva de abril a octubre, inicio y fin de la temporada verde
 (cuando la curva cruza la mitad de su amplitud al subir y al bajar), duración y velocidades de
@@ -111,31 +111,32 @@ coordenadas del centroide (km), la zona (k-means de tres grupos sobre los centro
 rendimiento), el rendimiento promedio de la zona y el promedio ponderado por distancia del
 rendimiento de las ocho parcelas de entrenamiento más cercanas.
 
-**Validación.** La métrica principal es el RMSE (criterio de FIRA), con MAE y R². Usamos
+**Validación.** La métrica principal es el RMSE (criterio de FIRA), con MAE y R². Se usó
 validación cruzada de 5 particiones estratificadas por estado —imita el reparto oficial 70/30,
-proporcional por zona y espacialmente mezclado— repetida 10 veces con semillas distintas;
-reportamos promedio y desviación entre repeticiones, y tratamos como ruido cualquier diferencia de
-RMSE menor a 0.03 t/ha. Como prueba más exigente añadimos una validación agrupada por municipio. Las variables de vecinos y de zona se
+proporcional por zona y espacialmente mezclado— repetida 10 veces con semillas distintas; se
+reporta promedio y desviación entre repeticiones, y se considera ruido cualquier diferencia de
+RMSE menor a 0.03 t/ha. Como prueba más exigente se añadió una validación agrupada por municipio.
+Las variables de vecinos y de zona se
 recalculan dentro de cada partición solo con las parcelas de entrenamiento de esa partición (y sin
 contar a la propia parcela), de modo que el rendimiento de una parcela nunca entra en sus propias
 variables ni en las de las parcelas con las que se evalúa.
 
-**Modelos.** Comparamos regresión ridge, Random Forest (400 árboles, hoja mínima de 3, 33 % de
+**Modelos.** Se compararon regresión ridge, Random Forest (400 árboles, hoja mínima de 3, 33 % de
 variables por partición), un LightGBM pequeño (300 árboles, tasa 0.03, 7 hojas, submuestreo,
 regularización L2) y un proceso gaussiano con núcleo RBF más ruido; los faltantes se rellenan con
 la mediana de entrenamiento dentro de cada ajuste. El banco de experimentos evaluó cada grupo de
 variables por separado, la ubicación más cada grupo, combinaciones completas y ensambles por
-promedio. Para las preguntas guía evaluamos cada índice con sus variables fenológicas y cada
-variable climática, solos y con la ubicación fija, calculamos la importancia por permutación del
-modelo final (cuánto sube el RMSE al barajar cada variable) y una ablación por grupos.
+promedio. Para las preguntas guía se evaluó cada índice con sus variables fenológicas y cada
+variable climática, solos y con la ubicación fija, y se calcularon la importancia por permutación
+del modelo final (aumento del RMSE al barajar cada variable) y una ablación por grupos.
 
 **Modelo final.** Es el promedio de dos modelos: LightGBM con ubicación, relieve y clima (11
 variables) y Random Forest con ubicación, fenología de Planet, clima y relieve (91 variables). La
 predicción se recorta al rango plausible de 1.5 a 6.5 t/ha. El rango de predicción al 80 % se
 calcula como ±1.28 veces el RMSE de validación. Para explicar cada predicción en la aplicación se calculan
 valores SHAP (Lundberg y Lee, 2017) promediados entre ambos modelos y agrupados por tipo de
-variable; con ellos la ficha de cada parcela indica qué factores subieron o bajaron su estimación. Para que la aplicación ejecute el modelo en el navegador ajustamos
-una regresión ridge sustituta sobre 11 variables y reportamos cuánto difiere del ensamble.
+variable; con ellos la ficha de cada parcela indica qué factores subieron o bajaron su estimación. Para que la aplicación ejecute el modelo en el navegador se ajustó
+una regresión ridge sustituta sobre 11 variables y se reporta cuánto difiere del ensamble.
 
 **Implementación.** Python 3.13 (pandas, geopandas, rasterio, scikit-learn, LightGBM, SHAP);
 aplicación en React, TypeScript, Leaflet y Recharts; scripts documentados en el README.
@@ -143,15 +144,15 @@ aplicación en React, TypeScript, Leaflet y Recharts; scripts documentados en el
 ## 5. Resultados y discusión [800 palabras]
 
 **Puntos de referencia.** Predecir el promedio de entrenamiento da RMSE 0.851 t/ha (R² −0.02).
-Un kNN espacial que solo mira a las ocho parcelas vecinas baja a 0.501 (R² 0.65): la ubicación
-sola explica cerca de dos tercios de la variación y es la vara real que cualquier modelo debía superar.
+Un kNN espacial que solo usa las ocho parcelas vecinas baja a 0.501 (R² 0.65): la ubicación por
+sí sola explica cerca de dos tercios de la variación y es la referencia que cualquier modelo debe superar.
 
 **Cada grupo de variables por separado** (CV 5×10, LightGBM). Solo coordenadas: 0.507; solo
 vecinos: 0.502; solo clima: 0.545; solo fenología de Planet: 0.625; solo Sentinel-2: 0.636; solo
 estadísticos simples de Planet (media, desviación, máximo, mínimo): 0.784; solo relieve: 0.762.
 La fenología completa vale mucho más que los estadísticos simples, porque la señal agronómica está
-al inicio del ciclo y en el secado, no en el máximo, que se satura en agosto–septiembre. Y el
-clima "predice" bien aunque solo tenga 25 valores distintos: funciona como etiqueta de zona.
+al inicio del ciclo y en el secado, no en el máximo, que se satura en agosto–septiembre. El clima
+predice bien pese a tomar solo 25 valores distintos: opera, en la práctica, como indicador de zona.
 
 **Ubicación más cada grupo.** Sumar a la ubicación los índices de Planet, Sentinel-2 o el clima deja
 el RMSE entre 0.500 y 0.515; sumar relieve lo lleva a 0.492. Ningún grupo aporta más de 0.01–0.02
@@ -163,7 +164,7 @@ agregar variables (ridge con 251 variables: 0.567); los de árboles se mantienen
 **Modelo final.** El ensamble LightGBM (ubicación, relieve, clima) + Random Forest (ubicación,
 fenología Planet, clima, relieve) obtiene RMSE 0.491 ± 0.007, MAE 0.336 y R² 0.664. En la
 validación agrupada por municipio da RMSE 0.574 frente a 0.708 del kNN puro: las variables
-satelitales, climáticas y de relieve sí ayudan cuando hay que extrapolar a municipios no vistos.
+satelitales, climáticas y de relieve sí mejoran la extrapolación a municipios no vistos.
 Por estado, el RMSE es 0.357 en Hidalgo, 0.375 en Tlaxcala y 0.578 en Puebla, donde el rendimiento
 es más alto y más variable (≈4.5 ± 0.5 t/ha): el modelo acierta el nivel de cada zona, pero explica
 poco de la variación dentro de Puebla. Las 59 predicciones tienen promedio 3.95 t/ha y van de 2.88 a
@@ -188,9 +189,9 @@ están limitadas por los 5 km de resolución del clima.
 **Pregunta 3: ¿qué combinación funciona mejor?** Ubicación + relieve + clima + fenología de Planet
 (RMSE 0.494 en la ablación), seguida de ubicación + relieve (0.496); la mejor sin ubicación es
 índices + clima + relieve (0.538) y la peor, solo relieve (0.754). Sumar Sentinel-2 a Planet no
-mejora (0.507–0.520): ven la misma fenología y Planet, casi diario, la describe mejor. La mejor
-combinación es poca información complementaria: la ubicación da el nivel, relieve y clima afinan
-la zona, la fenología explica diferencias dentro de ella.
+mejora (0.507–0.520): ambos sensores capturan la misma fenología y Planet, casi diario, la describe
+mejor. La combinación óptima reúne información complementaria: la ubicación fija el nivel, relieve
+y clima afinan la zona y la fenología explica diferencias dentro de ella.
 
 **Discusión.** En esta muestra la predicción espacial domina y los índices afinan en el margen; es
 una limitación del dato (138 parcelas, rendimiento comercial con redondeo, 25 píxeles de clima), no
@@ -199,14 +200,14 @@ rango al 80 % es de ±0.63 t/ha, y la aplicación lo muestra junto a cada estima
 
 ## 6. Uso de la ciencia de datos en la inclusión financiera del sector agro [300 palabras]
 
-Hoy el crédito de avío a pequeños productores de cebada se decide con información desigual: el
+Actualmente el crédito de avío a pequeños productores de cebada se decide con información asimétrica: el
 intermediario financiero conoce el historial del productor, si lo hay, pero no el potencial
 productivo de la parcela concreta que respaldará el pago. CebadaVision convierte datos públicos
 —imágenes satelitales, clima, relieve y la ubicación de la parcela— en una estimación de
 rendimiento por parcela con error conocido, sin visita de campo y actualizable cada ciclo. Eso
 cambia tres decisiones.
 
-Primera, el tamaño del crédito. Con rendimiento esperado, superficie y precio de referencia se
+Primera, el dimensionamiento del crédito. Con rendimiento esperado, superficie y precio de referencia se
 obtiene el valor esperado de la cosecha y, con el rango del modelo, un escenario conservador; el
 monto de avío puede ajustarse a lo que esa parcela puede pagar, no a un promedio regional. La
 aplicación muestra la producción estimada en toneladas y un semáforo bajo/medio/alto por terciles,
@@ -228,7 +229,7 @@ entenderla, cuestionarla y usarla en su propia negociación con la comercializad
 
 ## 7. Conclusiones [400 palabras]
 
-Construimos un modelo reproducible que predice el rendimiento de grano de parcelas de cebada de
+Se construyó un modelo reproducible que predice el rendimiento de grano de parcelas de cebada de
 temporal en Hidalgo, Tlaxcala y Puebla con RMSE de 0.491 ± 0.007 t/ha, MAE de 0.336 y R² de 0.664
 en validación cruzada estratificada por estado y repetida diez veces, frente a 0.851 del promedio
 regional y 0.501 de un kNN espacial. El modelo final es un ensamble de LightGBM y Random Forest
