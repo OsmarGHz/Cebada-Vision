@@ -45,7 +45,7 @@ Desde la raíz del repo:
 | 6 | `src/modelar.py` | paso 5 | `reports/experimentos.md` y `.csv` (banco de experimentos, CV 5×10 + municipio) |
 | 7 | `src/modelo_final.py` | paso 5 (+ 6 para textos) | `predicciones_197.csv`, `modelo_final.json`, `submissions/predicciones_59_CebadaVision.csv` |
 | 8 | `src/exportar_app.py` | paso 7 + shapefile + PRO | `data/app/` (archivos que lee la app) |
-| 9 | `src/generar_anexos.py` | paso 7 + `prompts_ia.md` | `reports/anexos_final.md` |
+| 9 | `src/generar_anexos.py` | paso 7 | `reports/anexos_final.md` |
 
 ```bash
 .venv/Scripts/python.exe src/extraer_raster.py
@@ -105,5 +105,4 @@ app/             dashboard
 reports/         reporte técnico y figuras
 submissions/     predicciones de las 59 parcelas
 DECISIONES.md    bitácora de acuerdos del equipo
-prompts_ia.md    registro obligatorio de prompts de IA
 ```

@@ -55,11 +55,10 @@ se generan con `RepeatedStratifiedKFold(5, 10, random_state=42)` sobre Estado (V
 | Archivo | Qué es |
 |---|---|
 | `reports/reporte_tecnico.md` | Las 7 secciones + bibliografía. Conteo propio: 538 / 149 / 196 / 696 / 800 / 299 / 402 palabras. La plataforma puede contar distinto: pegar con "Guardar avances" y verificar; recortar si marca exceso. |
-| `reports/anexos_final.md` | Tabla de 59 predicciones en 3 columnas, aportaciones por integrante, prompts de IA, enlaces. Convertir a PDF (máx. 4 cuartillas). |
+| `reports/anexos_final.md` | Tabla de 59 predicciones en 3 columnas, aportaciones por integrante, enlaces. Convertir a PDF (máx. 4 cuartillas). |
 | `reports/guion_video.md` | Guion de 5 minutos por bloques, con cifras del modelo final. |
 | `reports/experimentos.md` | Banco completo de experimentos (10 repeticiones). |
 | `DECISIONES.md` | Entrada del 17 oct con todas las decisiones de cierre. |
-| `prompts_ia.md` | Registro de IA (obligatorio). Hugo, Isaac, Cervantes y Boni deben agregar sus propios usos. |
 
 Bibliografía: solo referencias verificables. Se descartó Arizo-García et al. (no localizada).
 
@@ -71,7 +70,6 @@ Bibliografía: solo referencias verificables. Se descartó Arizo-García et al. 
 | 2 | Poner la URL en la plataforma y en `src/generar_anexos.py "URL_APP" "URL_VIDEO"` → regenera `anexos_final.md` | Osmar | #14 |
 | 3 | Grabar el video con `reports/guion_video.md`, subir con acceso por enlace | Isaac + Cervantes | #15 |
 | 4 | Cada integrante revisa y aprueba su fila en `reports/anexos.md` (sección A2) | Todos | #10 |
-| 5 | Completar `prompts_ia.md` con los usos de IA de cada quien | Todos | #5 |
 | 6 | Pegar el reporte sección por sección en la plataforma; subir Bibliografía y Anexos en PDF; verificar enlaces en azul | Osmar | — |
 | 7 | **Correo a innovacion@fira.gob.mx** con el CSV de 59 predicciones + código (zip del repo o liga) antes del 19 oct 23:59 | Osmar | — |
 | 8 | Borrar el comentario "sex" en la issue #11 y cerrar #11, #12 (poner respuesta a preguntas guía), #5, #8 | Osmar / Boni | — |

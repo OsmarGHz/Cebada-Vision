@@ -96,7 +96,7 @@ Nota: la página web indica 10 nov como "anuncio de finalistas"; el PDF de bases
 ## Reglas importantes
 
 - **Uso de IA permitido** siempre que se indique dónde se usó y se **anexen los prompts** en el
-  escrito. Mantener el registro en `prompts_ia.md` conforme avance el proyecto.
+  escrito.
 - Equipos de 3 a 5 estudiantes de licenciatura con inscripción vigente en universidades de
   Hidalgo, Tlaxcala o Puebla.
 - Causas de descalificación: información falsa o que no sea de autoría propia, no entregar
@@ -172,7 +172,6 @@ src/             código reutilizable (features, modelos, validación)
 app/             dashboard (Streamlit)
 reports/         reporte técnico y figuras
 submissions/     predicciones del 30 %
-prompts_ia.md    registro obligatorio de prompts de IA
 ```
 
 Entorno: Python 3.13, dependencias en `requirements.txt`.

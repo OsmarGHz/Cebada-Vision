@@ -4,27 +4,26 @@ Reto AgroCebada 2026 (FIRA) · Equipo CebadaVision · Octubre de 2026
 
 ## 1. Introducción [400–550 palabras]
 
-La cebada es uno de los cultivos más importantes del Altiplano central de México y la materia
-prima de la industria cervecera. Cerca de tres cuartas partes de la superficie nacional se siembra
-en esta región, casi toda de temporal, y Hidalgo, Puebla y Tlaxcala concentran la mayor parte de
-la producción (SIAP, 2023). Quienes la cultivan son, en su mayoría, pequeños y medianos
-productores que venden su cosecha a comercializadoras y parafinancieras. Para ellos, el
-rendimiento por hectárea define al mismo tiempo cuánto ganan y si podrán pagar el crédito de avío
-con el que financiaron el ciclo.
+La cebada es uno de los cultivos más importantes del sector agroindustrial: es fundamental para la
+industria maltera y cervecera y un insumo clave para alimentos y ganado. Todo ese sistema depende
+de la predictibilidad: el rendimiento por hectárea y la calidad del grano determinan la logística,
+los precios y la operación de la industria. En México, cerca de tres cuartas partes de la superficie se siembra en el
+Altiplano central, casi toda de temporal, y Hidalgo, Puebla y Tlaxcala concentran la mayor parte de
+la producción (SIAP, 2023), en manos de pequeños y medianos productores que venden su cosecha a
+comercializadoras y parafinancieras.
 
-Estimar el rendimiento de una parcela sin visitarla, y hacerlo para todas las parcelas de una
-región, es un problema abierto con valor público directo. Los satélites lo hacen posible: Sentinel-2 pasa
-cada cinco días con píxeles de 10 m y constelaciones como Planet observan casi a diario con
-píxeles de 3 m. Los estudios recientes muestran que los modelos de aprendizaje automático que
-combinan estas series con clima y relieve explican buena parte de la variación del rendimiento en
-cultivos de temporal (van Klompenburg et al., 2020; de la Fuente et al., 2023), aunque su
-desempeño depende de cuántas parcelas se tengan, de qué tan confiable sea el dato de rendimiento y
-de cómo estén repartidas.
+El cultivo enfrenta desafíos crecientes: el cambio climático altera los patrones de lluvia y
+temperatura, las plagas son menos predecibles y los insumos se encarecen. El entorno
+es especialmente difícil para los pequeños productores, que carecen de herramientas para
+monitorear sus cultivos de forma continua y toman decisiones reactivas. Ante ello, la combinación de imágenes satelitales, datos climáticos y
+aprendizaje automático permite convertir información compleja en decisiones claras: Sentinel-2
+observa cada cinco días a 10 m, Planet casi a diario a 3 m, y los modelos que combinan estas series
+con clima y relieve explican buena parte de la variación del rendimiento en cultivos de temporal
+(van Klompenburg et al., 2020; de la Fuente et al., 2023).
 
-El Reto AgroCebada 2026 plantea exactamente ese problema con datos reales: 197 parcelas de cebada
-de temporal del ciclo abril–octubre de 2025 en Hidalgo, Tlaxcala y Puebla, con índices de
-vegetación de Sentinel-2, Landsat y Planet, precipitación y temperatura mensuales, elevación y
-pendiente. El rendimiento de grano (toneladas por hectárea) se conoce para 138 parcelas; el de las
+El Reto AgroCebada 2026 plantea ese problema con datos reales: 197 parcelas de cebada de temporal
+del ciclo abril–octubre de 2025 en Hidalgo, Tlaxcala y Puebla, con índices de vegetación de
+Sentinel-2, Landsat y Planet, precipitación y temperatura mensuales, elevación y pendiente. El rendimiento de grano (toneladas por hectárea) se conoce para 138 parcelas; el de las
 otras 59 lo resguarda el comité para calificar las predicciones. Ese rendimiento proviene, en la
 mayoría de los casos, del registro de compra de la comercializadora y no de una medición en campo,
 por lo que contiene ruido y, en algunas zonas, está redondeado a medias toneladas.
@@ -47,38 +46,40 @@ preguntas guía del reto.
 
 ## 2. Justificación [100–200 palabras]
 
-FIRA y los intermediarios financieros rurales otorgan crédito de avío a productores de cebada sin
-una medida objetiva, oportuna y barata del rendimiento que puede dar cada parcela. Esa falta
-encarece el crédito, deja fuera a quienes no tienen historial y dificulta diseñar seguros ligados
-a la producción. Un modelo que estime el rendimiento de cualquier parcela georreferenciada a
-partir de datos satelitales y climáticos públicos, con un error conocido, convierte información
-que ya existe en un insumo para decidir.
+Los modelos tradicionales de evaluación y financiamiento agrícola dependen de estimaciones basadas
+en datos históricos y empíricos que no reflejan la realidad actual de cada parcela. Esa falta de
+información precisa genera incertidumbre y eleva el riesgo percibido; como resultado, los
+productores tienen dificultades para acceder a créditos justos y seguros adecuados, y quedan
+expuestos al clima y a otros imprevistos.
 
-El reto aporta además un caso poco común: datos reales de 197 parcelas con rendimiento comercial,
-no datos sintéticos ni de estación experimental. Resolverlo con rigor —validación reproducible,
-incertidumbre cuantificada y una explicación de cada predicción— es lo que hace creíble la
-herramienta tanto para el analista de crédito como para el productor, que fue el público prioritario
-señalado por FIRA en las sesiones de dudas.
+Este proyecto busca transformar esa vulnerabilidad en estabilidad: reducir la incertidumbre sobre el
+rendimiento con proyecciones basadas en evidencia satelital y climática, no en suposiciones, y con
+un error cuantificado. Los datos que genera son transparentes y trazables, lo que reduce la
+desigualdad de información en la cadena de valor y facilita el acceso a servicios financieros y la
+inversión pública y privada en el sector. El reto aporta además un caso poco común: datos reales de
+197 parcelas con rendimiento comercial, no sintéticos. Resolverlo con rigor —validación reproducible
+y explicación de cada predicción— es lo que hace creíble la herramienta para el analista de crédito
+y para el productor, público prioritario según FIRA.
 
 ## 3. Objetivos [200 palabras]
 
 **Objetivo general.** Predecir el rendimiento de grano (t/ha) de parcelas de cebada de temporal del
-ciclo abril–octubre de 2025 en Hidalgo, Tlaxcala y Puebla, a partir de índices de vegetación
-satelitales, clima, relieve y ubicación, y entregar las predicciones de las 59 parcelas sin dato
-con un error cuantificado.
+ciclo abril–octubre de 2025 en Hidalgo, Tlaxcala y Puebla a partir de índices de vegetación
+satelitales, clima, relieve y ubicación, y entregar las predicciones de las 59 parcelas sin dato.
 
 **Objetivos específicos.**
 
-1. Construir una tabla reproducible de variables por parcela que resuma la fenología de los
-   índices de Planet y Sentinel-2 (valores por mes, emergencia, máximo, duración, velocidad de
-   secado), el clima del ciclo, el relieve y la ubicación.
-2. Comparar modelos (Ridge, Random Forest, LightGBM, proceso gaussiano y ensambles) con un mismo
-   esquema de validación cruzada repetida y estratificada por estado, más una validación agrupada
-   por municipio, usando como referencia el promedio regional (RMSE 0.851) y un kNN espacial.
+1. Recopilar, auditar y limpiar datos de varias fuentes —índices de vegetación de Planet y
+   Sentinel-2, clima, relieve y registros espaciales— para construir un conjunto reproducible de
+   variables por parcela con la fenología de cada índice.
+2. Crear y probar modelos de aprendizaje automático (Ridge, Random Forest, LightGBM, proceso
+   gaussiano y ensambles) que predigan la cosecha de cada terreno, comparados con un mismo esquema
+   de validación cruzada repetida y estratificada por estado, con RMSE, MAE y R² frente al promedio
+   regional (RMSE 0.851) y a un kNN espacial.
 3. Responder con evidencia las tres preguntas guía: qué índice de vegetación pesa más, qué variable
    climática tiene mayor peso y qué combinación de variables funciona mejor.
-4. Poner el modelo al alcance de analistas y productores en una aplicación web que lo ejecute,
-   muestre mapa, rango de predicción y una explicación sencilla por parcela, y discutir su uso en
+4. Diseñar y poner en funcionamiento una aplicación interactiva que incluya el modelo y muestre las
+   predicciones en un mapa con su rango y una explicación sencilla por parcela; discutir su uso en
    inclusión financiera.
 
 ## 4. Metodología [600–700 palabras]
@@ -164,6 +165,8 @@ es más alto y más variable (≈4.5 ± 0.5 t/ha): el modelo acierta el nivel de
 poco de la variación dentro de Puebla. Las 59 predicciones tienen promedio 3.95 t/ha y van de 2.88 a
 4.65, en línea con el entrenamiento: 4.47 en Puebla, 3.79 en Hidalgo y 3.00 en Tlaxcala. Frente
 al Ridge provisional de nueve variables (0.551) la mejora es de 0.06 t/ha; frente al promedio, 0.36.
+Un Random Forest del equipo con clima y municipio/estado codificados (one-hot), con particiones
+propias, obtuvo 0.513 ± 0.087 (MAE 0.363, R² 0.621), coherente con el predominio de la zona.
 
 **Pregunta 1: ¿qué índice es más importante?** El EVI de Planet. Con los mismos folds, cada índice
 solo con sus variables fenológicas da RMSE 0.639 (EVI), 0.655 (MSAVI), 0.678 (NDVI) y 0.685 (LAI);

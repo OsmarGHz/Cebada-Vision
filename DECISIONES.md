@@ -34,10 +34,6 @@ conforme pasa, no se reconstruye después de memoria.
   máx. 4. Se diseña para que quepa en 2 mientras se confirma.
 - Encabezados exactos esperados en el CSV de predicción.
 
-## Registro de uso de IA (obligatorio en la entrega — llenar según se use)
-| Fecha | Herramienta | Para qué se usó |
-|---|---|---|
-| | | |
 
 ## 17 oct — Modelo final, app y reporte (cierre técnico)
 - **Modelo final = ensamble LightGBM + Random Forest** (promedio). M1: ubicación (vecinos kNN k=8,
@@ -71,5 +67,10 @@ conforme pasa, no se reconstruye después de memoria.
   `reports/anexos.md` (issue #10); pegar el reporte en la plataforma y verificar contador de
   palabras; enviar correo a innovacion@fira.gob.mx con CSV + código antes del 19 oct 23:59.
 
-## Registro de uso de IA
-Ver `prompts_ia.md` (registro completo, se reproduce en los anexos).
+- **Borrador de Isaac (`Documento Cebada-Vision.docx`)** integrado al informe: su Introducción,
+  Justificación y Objetivos son la base de esas secciones (con las afirmaciones ajustadas a lo que
+  los datos sostienen); su referencia de la Fuente et al. (2023) verificada y citada. La de
+  Arizo-García et al. no se localizó con ningún título/DOI, por lo que no se incluye.
+- **Experimento de Hugo:** `OneHotRandomForest_0` (clima + municipio/estado one-hot, particiones
+  propias): RMSE 0.513 ± 0.087, MAE 0.363, R² 0.621. Se cita en Resultados como evidencia del
+  equipo del predominio de la ubicación.

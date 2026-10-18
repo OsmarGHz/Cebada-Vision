@@ -1,5 +1,5 @@
-"""Rellena reports/anexos.md con la tabla de las 59 predicciones (en 3 columnas) y el registro de
-prompts de IA, y produce reports/anexos_final.md listo para convertir a PDF.
+"""Rellena reports/anexos.md con la tabla de las 59 predicciones (en 3 columnas) y los enlaces, y
+produce reports/anexos_final.md listo para convertir a PDF.
 
 Uso:  .venv/Scripts/python.exe src/generar_anexos.py [URL_APP] [URL_VIDEO]
 """
@@ -34,10 +34,8 @@ def main():
     url_video = sys.argv[2] if len(sys.argv) > 2 else "(pendiente)"
     df = pd.read_csv(SUB)
     assert len(df) == 59
-    prompts = (ROOT / "prompts_ia.md").read_text(encoding="utf-8").split("\n", 4)[-1]
     md = (ROOT / "reports" / "anexos.md").read_text(encoding="utf-8")
     md = (md.replace("<!-- TABLA_PREDICCIONES -->", tabla_3_columnas(df))
-            .replace("<!-- PROMPTS_IA -->", prompts)
             .replace("<!-- URL_APP -->", url_app).replace("<!-- URL_VIDEO -->", url_video))
     out = ROOT / "reports" / "anexos_final.md"
     out.write_text(md, encoding="utf-8")

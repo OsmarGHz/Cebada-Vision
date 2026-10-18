@@ -34,33 +34,12 @@ parcelas del conjunto de predicción. Mismo contenido que el archivo CSV enviado
 |---|---|---|
 | Osmar Javier (capitán) | Coordinación | Organización en sprints e issues de GitHub; registro de decisiones (`DECISIONES.md`); seguimiento de las sesiones de dudas con FIRA; integración de entregables y carga en la plataforma. |
 | David Bonifacio | Datos | Auditoría independiente de IDs, fechas y unión de fuentes (`src/auditoria_datos.py`); extracción de clima y topografía por polígono (`src/extraer_raster.py`); tabla PRO por parcela con filtro de nubosidad sin imputación (`src/tabla_pro.py`); clima por ciclo y README reproducible (`src/clima_ciclo.py`). |
-| Hugo Palencia | Modelo | Baseline V0/V1 con los folds fijos; comparación Ridge por bloques de variables (`docs/experimentos.md`); validación de referencias del modelo. |
+| Hugo Palencia | Modelo | Baseline V0 (media) y V1 (regresión lineal) con los folds fijos; comparación por bloques de variables; Random Forest con clima y municipio/estado codificados (RMSE 0.513 ± 0.087, R² 0.621), que confirmó el peso de la ubicación. |
 | David Cervantes | App | Diseño y desarrollo de la aplicación web (React/TypeScript/Leaflet), contrato de datos modelo→app, validador, modo productor/analista, simulador y despliegue público. |
-| Isaac | Reporte | Documento compartido con las secciones y límites; borrador de Introducción, Justificación y Objetivos; referencias; guion del video con Cervantes. |
-| Equipo (con asistencia de IA) | Modelo final | Ingeniería de variables fenológicas (`src/features.py`), banco de experimentos con CV repetida y agrupada (`src/modelar.py`), ensamble final, SHAP y notas en lenguaje llano (`src/modelo_final.py`), exportador (`src/exportar_app.py`). Ver A3. |
+| Isaac | Reporte | Documento compartido con las secciones y límites; redacción de Introducción, Justificación y Objetivos (base del informe final); referencias bibliográficas; guion del video con Cervantes. |
+| Equipo | Modelo final | Ingeniería de variables fenológicas (`src/features.py`), banco de experimentos con CV repetida y agrupada (`src/modelar.py`), ensamble final y explicación por parcela (`src/modelo_final.py`), exportador (`src/exportar_app.py`). |
 
-## A3. Uso de inteligencia artificial y prompts
-
-Se usó Claude (Anthropic) como asistente de programación y redacción, siempre con revisión del
-equipo. El registro completo, con fecha, integrante, uso y prompt textual, está en `prompts_ia.md`
-del repositorio; se reproduce íntegro aquí.
-
-
-| Fecha | Herramienta | Integrante | Uso (sección / archivo) | Prompt |
-|---|---|---|---|---|
-| 2026-09-17 | Claude Code | | Lectura y resumen de las bases del reto; creación de `CLAUDE.md` | "vamos a trabajar en un proyecto para el datathon AgroCebada, estudia el pdf y la info de esta pagina: https://www.fira.gob.mx/Nd/Convocatoria-2026.html#bases" |
-| 2026-09-17 | Claude Code | | Documento de contexto del proyecto | "ok, igual genera un .md para el contexto" |
-| 2026-09-18 | Claude Code | | Planeación de siguientes pasos y estructura del proyecto | "que sigue?" |
-| 2026-09-18 | Claude Code | | EDA, extracción de clima/topografía por parcela, baselines espaciales (`src/eda_*.py`, `src/extraer_raster.py`, `reports/eda_hallazgos.md`) | "ya está el dataset, continua con lo del punto 1" |
-| 2026-10-02 | Claude Code | | Tabla PRO una fila por parcela abr–oct 2025, nulos omitidos y verificados (`src/tabla_pro.py`, `data/processed/variables_pro_abr_oct_2025.csv`) | "Objetivo: Dejar en el repo la tabla de una fila por parcela con variables de PRO (abril–octubre 2025), lista para el baseline de Hugo" (issue + revisión del issue anterior) |
-| 2026-10-11 | Claude Code | | Tabla de clima abr–oct 2025 por parcela (`src/clima_ciclo.py`, `data/processed/clima_ciclo_2025.csv`), README con orden de ejecución, versiones fijadas en `requirements.txt`, `n_obs` única en tabla PRO, auditoría sin revisión redundante de IDs de clima/topografía | "este es un nuevo issue, hazlo y dime como entregarlo" (captura del issue: tabla de clima por parcela + repo reproducible) |
-| 2026-10-11 | Claude Code | | Revisión de la app (`agrocebada-pagina`) contra las bases; exportador de datos reales con Ridge provisional (`src/exportar_app.py`) y ajustes de textos en la app | "como vez agrocebada-pagina cumple?" / "puedes hacerlo y hacer las modificaciones en el repo original?" |
-| 2026-09-30 a 2026-10-06 | Claude (claude.ai) | Osmar | Seguimiento de issues del equipo, revisión del borrador de Isaac, verificación de scripts de Boni, baseline de Hugo, actualización de `contexto_proyecto.md` y `DECISIONES.md` | Chat compartido: "Por ahora te vas a encargar de checar el progreso de la parte de Isaac…", "qué me tocaría actualizar? Toca crear nuevas issues…", "como estaria eso de los prompts?", "Isaac ya hizo su parte…", "cuando alguien termine lo de una issue suya, qué tendría que reportar…", "Olvidé pasarte los archivos de boni", "Me puso Lucy…", "te paso el md de decisiones y el md de contexto… actualízalos" |
-| 2026-10-17 | Claude Code | | Lectura del chat compartido y de las issues del repo `OsmarGHz/Cebada-Vision` (vía `gh`), resumen de estado y riesgos | "como te puedo pasar info de un chat de claude que me compartieron?" / "checa las issues del repositorio https://github.com/OsmarGHz/Cebada-Vision.git" |
-| 2026-10-17 | Claude Code | | Ingeniería de variables fenológicas Planet/Sentinel-2 + ubicación (`src/features.py`); banco de experimentos con CV 5×10 estratificada y CV por municipio, vecinos fuera de fold (`src/modelar.py`, `reports/experimentos.md`); modelo final ensamble LightGBM+RF, importancia por permutación, ablación, SHAP y notas en lenguaje llano, CSV de 59 predicciones (`src/modelo_final.py`, `submissions/`); exportador para la app (`src/exportar_app.py`); ajustes de la app (nota llana, factores SHAP, preguntas guía, textos de Acerca, nombre CebadaVision); reporte técnico (`reports/reporte_tecnico.md`), guion del video, anexos | "en base a los avances reportados en los issues del repositorio, sus tres ramas, y la pagina ya hecha, necesito que termines y complementes el proyecto del reto… termina lo que empezaste" |
-
-
-## A4. Enlaces
+## A3. Enlaces
 
 - Aplicación: (pendiente de despliegue)
 - Video demostrativo: (pendiente)
