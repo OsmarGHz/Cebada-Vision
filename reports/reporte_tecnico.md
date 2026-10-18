@@ -92,8 +92,8 @@ con un error cuantificado.
 predecir), 47 804 observaciones de Planet (NDVI, EVI, LAI, MSAVI) de 2025, 107 666 de Sentinel-2 y
 Landsat de 2022 a 2025 (22 índices), rásteres mensuales de precipitación (CHIRPS) y de temperatura
 mínima y máxima a unos 5 km, y elevación y pendiente del Continuo de Elevaciones Mexicano. Una
-auditoría confirmó 197 identificadores únicos en todas las fuentes, la unión sin pérdidas entre
-shapefile y tablas, y el reparto 138/59. Se trabajó con el ciclo abril–octubre de 2025 (más
+auditoría confirmó 197 identificadores únicos en todas las fuentes, la unión sin pérdidas y el
+reparto 138/59. Se trabajó con el ciclo abril–octubre de 2025 (más
 noviembre, para capturar la senescencia). Las observaciones con nubosidad del 100 % se descartaron
 porque traen los índices vacíos; no se imputó ninguna. Landsat no aporta índices en 2025.
 
@@ -125,21 +125,20 @@ variables ni en las de las parcelas con las que se evalúa.
 variables por partición), un LightGBM pequeño (300 árboles, tasa 0.03, 7 hojas, submuestreo,
 regularización L2) y un proceso gaussiano con núcleo RBF más ruido; los faltantes se rellenan con
 la mediana de entrenamiento dentro de cada ajuste. El banco de experimentos evaluó cada grupo de
-variables por separado, la ubicación más cada grupo, combinaciones completas y ensambles por
-promedio. Para las preguntas guía se evaluó cada índice con sus variables fenológicas y cada
+variables por separado, la ubicación más cada grupo, combinaciones completas y ensambles. Para las preguntas guía se evaluó cada índice con sus variables fenológicas y cada
 variable climática, solos y con la ubicación fija, y se calcularon la importancia por permutación
 del modelo final (aumento del RMSE al barajar cada variable) y una ablación por grupos.
 
-**Modelo final.** Es el promedio de dos modelos: LightGBM con ubicación, relieve y clima (11
-variables) y Random Forest con ubicación, fenología de Planet, clima y relieve (91 variables). La
-predicción se recorta al rango plausible de 1.5 a 6.5 t/ha. El rango de predicción al 80 % se
-calcula como ±1.28 veces el RMSE de validación. Para explicar cada predicción en la aplicación se calculan
+**Modelo final.** Promedio de dos modelos: LightGBM con ubicación, relieve y clima (11 variables)
+y Random Forest con ubicación, fenología de Planet, clima y relieve (91 variables). La predicción
+se recorta al rango plausible de 1.5 a 6.5 t/ha; el rango de predicción al 80 % es ±1.28 veces el
+RMSE de validación. Para explicar cada predicción en la aplicación se calculan
 valores SHAP (Lundberg y Lee, 2017) promediados entre ambos modelos y agrupados por tipo de
 variable; con ellos la ficha de cada parcela indica qué factores subieron o bajaron su estimación. Para que la aplicación ejecute el modelo en el navegador se ajustó
 una regresión ridge sustituta sobre 11 variables y se reporta cuánto difiere del ensamble.
 
 **Implementación.** Python 3.13 (pandas, geopandas, rasterio, scikit-learn, LightGBM, SHAP);
-aplicación en React, TypeScript, Leaflet y Recharts; scripts documentados en el README.
+aplicación en React, TypeScript, Leaflet y Recharts.
 
 ## 5. Resultados y discusión [800 palabras]
 
