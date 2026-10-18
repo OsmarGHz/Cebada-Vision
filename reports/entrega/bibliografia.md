@@ -4,6 +4,9 @@ CebadaVision · Reto AgroCebada 2026 (FIRA)
 
 
 - Breiman, L. (2001). Random forests. *Machine Learning*, 45(1), 5–32.
+- de la Fuente, D., et al. (2023). Yield estimation using machine learning from satellite imagery.
+  *BIO Web of Conferences*, 68, 01013 (44th World Congress of Vine and Wine).
+  https://doi.org/10.1051/bioconf/20236801013
 - FIRA (2026). *Bases del Reto AgroCebada 2026*. Fideicomisos Instituidos en Relación con la
   Agricultura. https://www.fira.gob.mx/Nd/Convocatoria-2026.html
 - Funk, C., Peterson, P., Landsfeld, M., et al. (2015). The climate hazards infrared precipitation

@@ -17,8 +17,9 @@ un problema abierto con valor público directo. Los satélites lo hacen posible:
 cada cinco días con píxeles de 10 m y constelaciones como Planet observan casi a diario con
 píxeles de 3 m. Los estudios recientes muestran que los modelos de aprendizaje automático que
 combinan estas series con clima y relieve explican buena parte de la variación del rendimiento en
-cereales de temporal (van Klompenburg et al., 2020), aunque su desempeño depende de cuántas
-parcelas se tengan, de qué tan confiable sea el dato de rendimiento y de cómo estén repartidas.
+cultivos de temporal (van Klompenburg et al., 2020; de la Fuente et al., 2023), aunque su
+desempeño depende de cuántas parcelas se tengan, de qué tan confiable sea el dato de rendimiento y
+de cómo estén repartidas.
 
 El Reto AgroCebada 2026 plantea exactamente ese problema con datos reales: 197 parcelas de cebada
 de temporal del ciclo abril–octubre de 2025 en Hidalgo, Tlaxcala y Puebla, con índices de
