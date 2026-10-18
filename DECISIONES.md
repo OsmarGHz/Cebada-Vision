@@ -38,3 +38,38 @@ conforme pasa, no se reconstruye después de memoria.
 | Fecha | Herramienta | Para qué se usó |
 |---|---|---|
 | | | |
+
+## 17 oct — Modelo final, app y reporte (cierre técnico)
+- **Modelo final = ensamble LightGBM + Random Forest** (promedio). M1: ubicación (vecinos kNN k=8,
+  media de zona, x, y) + relieve + clima (11 variables). M2: ubicación + fenología Planet
+  (80 variables: medianas mensuales, ventanas, emergencia, pico, duración, pendientes) + clima +
+  relieve. Predicción recortada a 1.5–6.5 t/ha. Scripts: `src/features.py` → `src/modelar.py` →
+  `src/modelo_final.py` → `src/exportar_app.py`.
+- **Métricas (CV 5 folds estratificada por estado × 10 repeticiones, vecinos calculados dentro del
+  fold):** RMSE 0.491 ± 0.007, MAE 0.336, R² 0.664. CV agrupada por municipio: RMSE 0.574.
+  Referencias con los mismos folds: media 0.851; kNN espacial 0.501; Ridge provisional (9 vars) 0.551.
+- **Hallazgo central:** la ubicación explica ~2/3 de la varianza; índices, clima y relieve agregan
+  0.01–0.02 t/ha una vez conocida la ubicación. Se declara como limitación del dato (138 parcelas,
+  rendimiento comercial redondeado en Tlaxcala, clima a 5 km), no se oculta.
+- **Preguntas guía:** (1) EVI de Planet (señal en mayo–junio y velocidad de secado); (2) precipitación
+  del ciclo (anomalía respecto a 2022–2024); (3) ubicación + relieve + clima + fenología Planet;
+  Sentinel-2 no mejora sobre Planet. Evidencia en `reports/experimentos.md` y `modelo_final.json`.
+- **Folds:** `particiones_cv.csv` original no está en ningún branch del repo; se usa
+  `RepeatedStratifiedKFold(5, 10, random_state=42)` sobre Estado, documentado en `src/modelar.py`.
+  El V0 reproduce 0.851 igual.
+- **CSV para FIRA:** `submissions/predicciones_59_CebadaVision.csv` (EQUIPO, ID_POLIGONO,
+  RENDIMIENTO_T_HA, 4 decimales, 59 filas). Ajustar encabezados a la plantilla de FIRA si difiere.
+- **App:** nombre **CebadaVision**; ficha con nota en lenguaje llano y factores SHAP por parcela;
+  página Modelo muestra las respuestas a las preguntas guía del equipo; Acerca corregido
+  ("proporcional entre estados", Planet en el modelo final, descripción del modelo); simulador =
+  ridge sustituta (diferencia típica con el ensamble reportada en `modelo.json`). Contrato de datos
+  actualizado (`nota`, `factores`, `preguntas_guia` opcionales).
+- **Reporte técnico:** `reports/reporte_tecnico.md`, secciones dentro de los límites de palabras.
+  Bibliografía solo con referencias verificables; se descartó Arizo-García (no localizada).
+- **Pendientes del equipo (no automatizables):** desplegar la app y pegar la URL (issue #14);
+  grabar el video con `reports/guion_video.md` (issue #15); cada integrante aprueba su fila en
+  `reports/anexos.md` (issue #10); pegar el reporte en la plataforma y verificar contador de
+  palabras; enviar correo a innovacion@fira.gob.mx con CSV + código antes del 19 oct 23:59.
+
+## Registro de uso de IA
+Ver `prompts_ia.md` (registro completo, se reproduce en los anexos).

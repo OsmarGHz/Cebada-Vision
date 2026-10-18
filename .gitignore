@@ -8,3 +8,9 @@ data/external/
 DATASET_RETO_AGRO_2026/
 DataSet.zip
 data/app/
+
+# repo aparte (David54s/agrocebada-pagina) y archivos locales
+agrocebada-pagina/
+int/
+prueba.py
+reports/*_log.txt

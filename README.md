@@ -41,15 +41,32 @@ Desde la raíz del repo:
 | 2 | `src/auditoria_datos.py` | CSV de rendimiento, shapefile, BASICO, PRO | `auditoria_union_4fuentes.csv` |
 | 3 | `src/tabla_pro.py` | PRO | `variables_pro_abr_oct_2025.csv` |
 | 4 | `src/clima_ciclo.py` | `clima_mensual_parcela.csv` (paso 1) | `clima_ciclo_2025.csv` |
-| 5 | `src/exportar_app.py` | pasos 1–4 + dataset | `data/app/` (archivos que lee la app) |
+| 5 | `src/features.py` | pasos 1, 3, 4 + PRO y BASICO crudos | `features_parcela.csv` (285 variables: fenología Planet y Sentinel-2, clima, relieve, ubicación) |
+| 6 | `src/modelar.py` | paso 5 | `reports/experimentos.md` y `.csv` (banco de experimentos, CV 5×10 + municipio) |
+| 7 | `src/modelo_final.py` | paso 5 (+ 6 para textos) | `predicciones_197.csv`, `modelo_final.json`, `submissions/predicciones_59_CebadaVision.csv` |
+| 8 | `src/exportar_app.py` | paso 7 + shapefile + PRO | `data/app/` (archivos que lee la app) |
+| 9 | `src/generar_anexos.py` | paso 7 + `prompts_ia.md` | `reports/anexos_final.md` |
 
 ```bash
 .venv/Scripts/python.exe src/extraer_raster.py
 .venv/Scripts/python.exe src/auditoria_datos.py
 .venv/Scripts/python.exe src/tabla_pro.py
 .venv/Scripts/python.exe src/clima_ciclo.py
+.venv/Scripts/python.exe src/features.py
+.venv/Scripts/python.exe src/modelar.py          # ~10 min; --rapido para 3 repeticiones
+.venv/Scripts/python.exe src/modelo_final.py     # ~4 min
 .venv/Scripts/python.exe src/exportar_app.py
+.venv/Scripts/python.exe src/generar_anexos.py "URL de la app" "URL del video"
 ```
+
+## 3b. Modelo final
+
+Ensamble (promedio) de LightGBM —ubicación, relieve, clima— y Random Forest —ubicación, fenología
+de Planet, clima, relieve—. Ubicación = rendimiento promedio de las 8 parcelas vecinas (ponderado
+por distancia), promedio de la zona y coordenadas; se calcula dentro de cada fold de validación.
+Validación: 5 folds estratificados por estado × 10 repeticiones. **RMSE 0.491 ± 0.007, MAE 0.336,
+R² 0.664** (media regional 0.851; kNN espacial 0.501). Detalle en `reports/experimentos.md`,
+`reports/reporte_tecnico.md` y `DECISIONES.md` (17 oct).
 
 `tabla_pro.py` acepta opcionalmente la ruta a `particiones_cv.csv` para imprimir el RMSE del
 modelo de media por fold.
@@ -73,9 +90,10 @@ La app web está en otro repositorio:
 lo que la app lee (`parcelas.geojson`, `modelo.json`, `series.json`, `predicciones.csv`) con el
 formato de su `docs/CONTRATO_DATOS.md`; se copian a `public/data/` de la app.
 
-El modelo del exportador es un **Ridge provisional** (índices de Planet + clima + relieve, RMSE
-de CV 0.551). Al tener el modelo final se cambia `VARIABLES` y `ajustar()` en el script; la app no
-cambia. `data/app/` no se versiona aquí: los archivos viven en el repo de la app.
+El exportador lee las salidas de `src/modelo_final.py` (no reentrena). Además del contrato base,
+escribe por parcela una `nota` en lenguaje llano y los `factores` SHAP, y en `modelo.json` las
+`preguntas_guia`. `data/app/` no se versiona aquí: los archivos viven en el repo de la app
+(`public/data/`).
 
 ## 6. Estructura
 
