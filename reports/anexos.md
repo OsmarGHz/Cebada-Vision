@@ -2,15 +2,12 @@
 
 ## A1. Predicciones de las 59 parcelas (t/ha, 4 decimales)
 
-Archivo: `submissions/predicciones_59_CebadaVision.csv` (mismo contenido que se envía por correo a
-innovacion@fira.gob.mx). La tabla se genera con el script de abajo y se pega aquí en tres columnas
-para que quepa en una cuartilla.
+Rendimiento de grano estimado por el modelo final (ensamble LightGBM + Random Forest) para las 59
+parcelas del conjunto de predicción. Mismo contenido que el archivo CSV enviado a FIRA.
 
 <!-- TABLA_PREDICCIONES -->
 
 ## A2. Actividades y aportaciones de cada integrante
-
-> Cada integrante revisa y aprueba su fila (issue #10). Completar con 3–5 líneas de hechos.
 
 | Integrante | Rol | Actividades y aportaciones |
 |---|---|---|
