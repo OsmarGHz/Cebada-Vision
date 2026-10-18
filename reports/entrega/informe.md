@@ -102,9 +102,9 @@ LAI, fAPAR, NDWI, MSI, NDTI). El clima se resumió en lluvia acumulada abril–o
 mínima y máxima medias del ciclo y anomalía de lluvia respecto al promedio 2022–2024; por la
 resolución del ráster, estas variables solo toman 25 valores distintos en las 197 parcelas. El
 relieve aporta elevación media, su variación y pendiente media. La ubicación se representó con las
-coordenadas del centroide (EPSG:6372, en km), la zona (k-means de tres grupos sobre los centroides,
-sin usar el rendimiento), el rendimiento promedio de la zona y el promedio, ponderado por distancia,
-del rendimiento de las ocho parcelas de entrenamiento más cercanas.
+coordenadas del centroide (km), la zona (k-means de tres grupos sobre los centroides, sin usar el
+rendimiento), el rendimiento promedio de la zona y el promedio ponderado por distancia del
+rendimiento de las ocho parcelas de entrenamiento más cercanas.
 
 **Validación.** La métrica principal es el RMSE (criterio de FIRA), con MAE y R². Usamos
 validación cruzada de 5 particiones estratificadas por estado —imita el reparto oficial 70/30,
@@ -127,11 +127,10 @@ modelo final (cuánto sube el RMSE al barajar cada variable) y una ablación por
 **Modelo final.** Es el promedio de dos modelos: LightGBM con ubicación, relieve y clima (11
 variables) y Random Forest con ubicación, fenología de Planet, clima y relieve (91 variables). La
 predicción se recorta al rango plausible de 1.5 a 6.5 t/ha. El rango de predicción al 80 % se
-calcula como ±1.28 veces el RMSE de validación. La explicación de cada parcela usa valores SHAP
-(Lundberg y Lee, 2017) promediados entre ambos modelos, agrupados por tipo de variable y traducidos
-a una nota en lenguaje sencillo. Para que la aplicación ejecute el modelo en el navegador ajustamos
-una regresión ridge sustituta sobre 11 variables interpretables y reportamos cuánto difiere del
-ensamble.
+calcula como ±1.28 veces el RMSE de validación. Para explicar cada predicción en la aplicación se calculan
+valores SHAP (Lundberg y Lee, 2017) promediados entre ambos modelos y agrupados por tipo de
+variable; con ellos la ficha de cada parcela indica qué factores subieron o bajaron su estimación. Para que la aplicación ejecute el modelo en el navegador ajustamos
+una regresión ridge sustituta sobre 11 variables y reportamos cuánto difiere del ensamble.
 
 **Implementación.** Python 3.13 (pandas, geopandas, rasterio, scikit-learn, LightGBM, SHAP);
 aplicación en React, TypeScript, Leaflet y Recharts; scripts documentados en el README.
