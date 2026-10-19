@@ -142,7 +142,7 @@ Nota: la página web indica 10 nov como "anuncio de finalistas"; el PDF de bases
 ## Hechos clave del dataset
 
 - Rendimiento = ciclo **abr–oct 2025** únicamente; datos 2022–2024 solo como historial.
-- Rendimiento = **grano** (no forraje), t/ha. Fuente: mayormente la **comercializadora/parafinanciera** que le compra al productor (pocos casos directos del productor); sin medición instrumental. Una medición por parcela.
+- Rendimiento = **grano** (no forraje), t/ha. Origen aclarado para esta revisión: **pesaje en báscula de la cosecha de cada parcela, sin ajustes por humedad, impurezas o mermas**. El reporte por comercializadora/parafinanciera no implica ausencia de medición. Ver trazabilidad y documentos originales pendientes en `reports/REVISION_DOCUMENTAL_2026-10-18.md`.
 - Todas las parcelas son de **temporal** (sin riego) — confirmado por FIRA (27-sep).
 - Partición 70/30 entrenamiento/predicción es **estratificada por zona geográfica**, no aleatoria
   pura — cada una de las 3 zonas está representada en ambos conjuntos.

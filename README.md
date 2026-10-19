@@ -66,7 +66,11 @@ de Planet, clima, relieve—. Ubicación = rendimiento promedio de las 8 parcela
 por distancia), promedio de la zona y coordenadas; se calcula dentro de cada fold de validación.
 Validación: 5 folds estratificados por estado × 10 repeticiones. **RMSE 0.491 ± 0.007, MAE 0.336,
 R² 0.664** (media regional 0.851; kNN espacial 0.501). Detalle en `reports/experimentos.md`,
-`reports/reporte_tecnico.md` y `DECISIONES.md` (17 oct).
+`reports/reporte_tecnico.md` y `DECISIONES.md` (17 oct). La reducción de 0.010 t/ha frente al
+kNN es pequeña y no demuestra superioridad estadística. El margen ±0.63 t/ha es orientativo,
+sin cobertura del 80 % calibrada. El R² por estado es 0.784 en Hidalgo, 0.007 en Puebla y
+−0.026 en Tlaxcala. El análisis retrospectivo usa observaciones hasta noviembre de 2025;
+la predicción precosecha y la actualización por ciclo requieren validación adicional.
 
 `tabla_pro.py` acepta opcionalmente la ruta a `particiones_cv.csv` para imprimir el RMSE del
 modelo de media por fold.
@@ -93,7 +97,14 @@ formato de su `docs/CONTRATO_DATOS.md`; se copian a `public/data/` de la app.
 El exportador lee las salidas de `src/modelo_final.py` (no reentrena). Además del contrato base,
 escribe por parcela una `nota` en lenguaje llano y los `factores` SHAP, y en `modelo.json` las
 `preguntas_guia`. `data/app/` no se versiona aquí: los archivos viven en el repo de la app
-(`public/data/`).
+(`public/data/`). El mapa y las fichas consultan predicciones precalculadas del ensamble;
+el navegador ejecuta el simulador Ridge sustituto (RMSE de ajuste frente al ensamble: 0.3161
+t/ha sobre las mismas 197 parcelas), sin interpretación causal. Esta cifra no es su error
+validado contra rendimientos reales.
+
+Revisión documental, fuentes y pendientes: `reports/REVISION_DOCUMENTAL_2026-10-18.md`.
+Copia con nombre para entrega: `reports/entrega/CebadaVision_prediccion.csv`; conserva
+exactamente los bytes del CSV original y requiere cotejo con la plantilla oficial.
 
 ## 6. Estructura
 
