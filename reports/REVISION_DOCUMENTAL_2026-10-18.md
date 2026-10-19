@@ -36,10 +36,23 @@ FIRA no impone una fecha de corte al conjunto de datos (preguntas adicionales, p
 Usar el ciclo completo está permitido; afirmar anticipación precosecha requiere indicar cuándo
 se emitiría la predicción y qué información estaría disponible entonces.
 
-No se recibió `Revision_CebadaVision_Propuestas_2026-10-18.md` ni una plantilla con las 59 filas
-originales de FIRA entre estos nueve adjuntos. Se aplicaron las correcciones expresamente
-solicitadas y se comprobó la consistencia interna de IDs; no se atribuye a esos archivos un cotejo
-que no se pudo realizar.
+Posteriormente se recibieron y cotejaron dos archivos adicionales:
+
+- `Revision_CebadaVision_Propuestas_2026-10-18.md`: se contrastaron los puntos C1–C8 y las
+  propuestas de anexos contra esta rama. SHA-256:
+  `c80d949a1360741a57b12de8086e35b2930d59c676874cff9f431df0cce455f9`.
+- `ID_area_rendimiento_70_30_Reto_AgroCebada.csv`, del dataset original: fuente para comprobar
+  la pertenencia de las 59 parcelas a evaluación. SHA-256:
+  `ec07b7ede0ae692109d91b3e941b1a353fe7f89410507db9bfbe6d7c112590ef`.
+  Contiene 197 IDs únicos, 138 filas `ENTRENAMIENTO` con rendimiento y 59 `PREDICCION`
+  con rendimiento vacío. Sus cuatro campos son `ID_POLIGONO`, `AREA_HA`, `RENDIMIENTO_T_HA`
+  y `CONJUNTO`; una coma final añade una columna vacía en todas las filas.
+
+Este CSV es la tabla de entrada del modelo, no una plantilla de salida de 59 estimaciones.
+Permite cerrar el cotejo de los IDs originales, sin trasladar las 197 filas, la columna vacía ni
+los rendimientos conocidos al archivo de entrega. Se conservan los encabezados actuales de la
+salida: `EQUIPO,ID_POLIGONO,RENDIMIENTO_T_HA`. No se recibió una plantilla de salida distinta.
+Ambos originales se consultaron sin modificarlos y no se incorporaron al repositorio público.
 
 Se revisó también el código y los datos de la aplicación en
 [`David54s/agrocebada-pagina`, commit `d77d4852`](https://github.com/David54s/agrocebada-pagina/tree/d77d4852f1b0ed7256428cbb22e188be68dcbbfd).
@@ -73,8 +86,11 @@ las mismas siete secciones; el guion, README, guías y anexos reflejan las misma
 - Los 59 pares ID/rendimiento coinciden con las tablas Markdown, Word y PDF de anexos, con
   `predicciones_197.csv` y con los IDs del subconjunto de predicción de `features_parcela.csv`.
   Los 59 pares también coinciden con `public/data/predicciones.csv` de la app en el commit
-  revisado. Esto verifica consistencia interna; los nueve adjuntos no contienen la tabla original
-  de IDs de FIRA para un cotejo independiente.
+  revisado. Además, las 59 filas `PREDICCION` del CSV original del dataset coinciden exactamente
+  con los IDs y el orden de los tres CSV de entrega: cero duplicados, faltantes o sobrantes.
+- Los 197 IDs, áreas y etiquetas de conjunto de `features_parcela.csv` coinciden con el CSV
+  original; también coinciden los 138 rendimientos observados y los 59 rendimientos vacíos.
+  Este cotejo no revela los rendimientos reservados ni evalúa la precisión sobre esas 59 parcelas.
 - La plantilla de anexos reproduce el Markdown final usando las predicciones originales y
   los marcadores de enlaces pendientes.
 - El texto del Word y del PDF del informe coincide con su fuente Markdown, excluyendo las
@@ -104,6 +120,32 @@ manteniendo los decimales. Ninguno sustituye el contador de Word o de la platafo
 
 Introducción y Metodología también conservan los mínimos de 400 y 600 palabras.
 
+## Cotejo del archivo de propuestas recuperado
+
+La redacción conserva el contenido de las correcciones C1–C8 sin exigir una sustitución literal:
+
+| Propuesta | Aplicación en esta rama |
+|---|---|
+| C1: origen del rendimiento | Introducción, Justificación y Conclusiones corrigen a pesaje en báscula sin ajustes; las fuentes identifican comercializadoras y productores. |
+| C2: aplicación | Introducción distingue las salidas precalculadas del ensamble y el simulador aproximado. |
+| C3: margen | Metodología aclara la falta de calibración de la cobertura del 80 %. |
+| C4: Ridge | Metodología precisa 11 variables y discrepancia 0.3161 t/ha frente al ensamble, sin validación independiente. |
+| C5: incertidumbre | Resultados distingue desviación del RMSE entre repeticiones de la incertidumbre individual. |
+| C6: kNN y estados | Resultados matiza 0.491 frente a 0.501 e incorpora R² y RMSE por estado; la discrepancia 0.506 de la app queda identificada. |
+| C7: alcance financiero y temporal | Inclusión financiera condiciona anticipación, nuevos ciclos y uso operativo a validación adicional. |
+| C8: cierre | Conclusiones mantiene las mismas reservas y distingue ensamble y Ridge. |
+
+Se conserva la tabla de 59 predicciones y se marca la aprobación de aportaciones como pendiente;
+la fila de Cervantes no acredita un despliegue verificado. No se inventan enlaces ni prompts.
+La guía original resuelve la ubicación de la relación de IA en Bibliografía, con referencia en A4.
+Los Word/PDF ya regenerados y sus conteos no cambian en este cotejo.
+
+La propuesta recuperada dice que el repositorio es privado: esa nota quedó superada por el
+cambio autorizado por el capitán y la consulta actual a GitHub, que confirma visibilidad pública.
+Su nombre sugerido `cebadavision_prediccion.csv` se interpreta dentro del patrón oficial
+`nombre_del_equipo_prediccion.csv`; la copia actual usa el nombre de equipo CebadaVision.
+Las instrucciones de envío del archivo se registran como requisitos para el equipo y no se ejecutan.
+
 ## Discrepancias de la app que requieren una revisión separada
 
 Referencias al commit revisado; este PR no modifica el segundo repositorio ni los JSON de datos:
@@ -131,15 +173,14 @@ Referencias al commit revisado; este PR no modifica el segundo repositorio ni lo
 
 ## Pendientes antes de entregar
 
-1. Si se recuperan el archivo de propuestas y la plantilla original de IDs, completar su cotejo.
-2. Confirmar que el nombre inscrito del equipo es CebadaVision. La copia propuesta
+1. Confirmar que el nombre inscrito del equipo es CebadaVision. La copia propuesta
    `CebadaVision_prediccion.csv` cumple el patrón confirmado por los correos originales;
    no se cambiaron encabezados ni se sustituyó el archivo fuente.
-3. Incorporar en **Bibliografía** los prompts reales, su propósito y la herramienta empleada
+2. Incorporar en **Bibliografía** los prompts reales, su propósito y la herramienta empleada
    por cada integrante. A4 remite a ese registro; revisar y aprobar también las aportaciones.
-4. Incorporar únicamente URLs verificadas de aplicación y video; aún no se proporcionaron.
-5. Resolver las discrepancias de la app descritas arriba y comprobar su funcionamiento.
-6. Revalidar los contadores de la plataforma, regenerar Word/PDF tras completar los pendientes
+3. Incorporar únicamente URLs verificadas de aplicación y video; aún no se proporcionaron.
+4. Resolver las discrepancias de la app descritas arriba y comprobar su funcionamiento.
+5. Revalidar los contadores de la plataforma, regenerar Word/PDF tras completar los pendientes
    y verificar las cuatro cuartillas de anexos. La guía advierte que **Publicar** impide cambios
    posteriores. El equipo debe aprobar el contenido y realizar la entrega completa.
 

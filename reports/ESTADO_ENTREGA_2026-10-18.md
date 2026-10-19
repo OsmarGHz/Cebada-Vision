@@ -34,8 +34,9 @@ reproduce. Ver `REVISION_DOCUMENTAL_2026-10-18.md` para evidencia, reservas y pe
   2. Variable climática: **precipitación del ciclo** (anomalía respecto a 2022–2024).
   3. Mejor combinación: **ubicación + relieve + clima + fenología Planet**. Sumar Sentinel-2 no mejora.
 - **59 predicciones:** `submissions/predicciones_59_CebadaVision.csv` (EQUIPO, ID_POLIGONO,
-  RENDIMIENTO_T_HA; 4 decimales). Media 3.95 t/ha, rango 2.88–4.65. Si la plantilla de FIRA trae
-  otros encabezados, cotejar antes de adaptar una copia; los originales y valores se conservan.
+  RENDIMIENTO_T_HA; 4 decimales). Media 3.95 t/ha, rango 2.88–4.65. Los 59 IDs y su orden
+  coinciden con las filas `PREDICCION` del CSV original de FIRA; cero duplicados, faltantes o
+  sobrantes. Los originales y valores se conservan.
   Copia con nombre de entrega: `reports/entrega/CebadaVision_prediccion.csv`.
 
 Scripts: `src/features.py` → `src/modelar.py` → `src/modelo_final.py` → `src/exportar_app.py`.

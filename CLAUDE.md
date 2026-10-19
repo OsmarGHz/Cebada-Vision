@@ -134,8 +134,10 @@ Nota: la página web indica 10 nov como "anuncio de finalistas"; el PDF de bases
 - Evaluación por parcela, sin ponderar por superficie, con RMSE, MAE y R²; no se especifica
   cómo se combinan (preguntas adicionales, p. 1, pregunta 2).
 - Predicción puntual en t/ha con **cuatro decimales**, exactamente 59 parcelas y sus IDs
-  originales. Nombre `nombre_del_equipo_prediccion.csv`. Los adjuntos no incluyen una tabla
-  original de los 59 IDs ni un encabezado CSV obligatorio para cotejo independiente.
+  originales. Nombre `nombre_del_equipo_prediccion.csv`. Los 59 IDs y su orden ya se cotejaron
+  contra las filas `PREDICCION` de `ID_area_rendimiento_70_30_Reto_AgroCebada.csv` del dataset
+  original, sin faltantes ni sobrantes. Ese archivo contiene las 197 parcelas y no es una plantilla
+  de entrega. Se conserva la salida `EQUIPO,ID_POLIGONO,RENDIMIENTO_T_HA`.
 - Sin fechas exactas de siembra/cosecha por parcela; referencia general de siembra a inicios
   de mayo. Sin rotación, siniestros o dosis por parcela. Josefa predomina y Voyager aparece en
   menor proporción, sin identificación por parcela (segunda sesión, preguntas 2, 4, 10, 12 y 14).

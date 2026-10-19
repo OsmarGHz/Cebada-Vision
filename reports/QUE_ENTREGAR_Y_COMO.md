@@ -26,7 +26,7 @@ La plataforma ha fallado al guardar textos largos. Por eso FIRA pide **dos cosas
 | 2 | **Bibliografía en PDF aparte** | `reports/entrega/02_Bibliografia_CebadaVision.docx` → PDF | Falta integrar prompts reales, propósito y herramienta; aprobar el PDF |
 | 3 | **Anexos en PDF aparte** (máx. 4 cuartillas: tabla de 59 predicciones, aportaciones por integrante, enlaces) | `reports/entrega/03_Anexos_CebadaVision.docx` → PDF | Faltan URLs verificadas y aprobación de aportaciones |
 | 4 | **Enlace a la aplicación**, verificado que abre sin permisos | URL pública de `agrocebada-pagina` (ver `DESPLIEGUE_APP.md`) | **Falta desplegar** |
-| 5 | **CSV con las 59 estimaciones**, en el formato que indicaron | `reports/entrega/CebadaVision_prediccion.csv` | Copia idéntica del original; cotejar encabezados e IDs con la plantilla oficial antes de entregar |
+| 5 | **CSV con las 59 estimaciones**, en el formato que indicaron | `reports/entrega/CebadaVision_prediccion.csv` | Copia idéntica; 59 IDs y orden cotejados contra el CSV original del dataset, sin diferencias |
 
 También conviene adjuntar (correos del 21 de septiembre y 14 de octubre: enlaces al código y
 repositorios son complementarios): liga al repo `https://github.com/OsmarGHz/Cebada-Vision` y al de la app, o un
@@ -70,7 +70,7 @@ probar también en incógnito.
 - [ ] Cada integrante aprueba su fila en `reports/anexos.md` e integra en `reports/entrega/bibliografia.md` sus prompts reales, propósito y herramienta. Sincronizar Bibliografía en `reports/reporte_tecnico.md` y regenerar su Word/PDF. No reconstruir ni inventar registros.
 - [ ] `python src/generar_anexos.py "URL_APP" "URL_VIDEO"` → regenerar `03_Anexos_CebadaVision.docx` (`node src/md2docx.js reports/anexos_final.md reports/entrega/03_Anexos_CebadaVision.docx`) → PDF. Sincronizar también `reports/entrega/anexos.md` y comprobar el límite de cuatro cuartillas tras incorporar enlaces y aprobar aportaciones.
 - [ ] Abrir los tres .docx en Word, revisar, **Guardar como PDF**.
-- [ ] Verificar en la copia `CebadaVision_prediccion.csv` las 59 filas, cuatro decimales, encabezados e IDs contra la plantilla oficial. Conservar intactos ambos CSV originales.
+- [x] Verificados los 59 IDs y su orden contra las filas `PREDICCION` del CSV original del dataset; cuatro decimales y valores idénticos en las tres salidas. Conservar intactos ambos CSV originales y repetir el cotejo si se regenera la salida.
 - [ ] Subir todo a la plataforma (intentar; si falla, no pasa nada).
 - [ ] **Correo a innovacion@fira.gob.mx** con: Informe.pdf, Bibliografia.pdf, Anexos.pdf, CSV, URL de la app, URL del video, liga o zip del código. Asunto sugerido: "Entrega final – Equipo CebadaVision – Reto AgroCebada 2026".
 - [ ] Guardar copia del correo enviado (captura) como respaldo.

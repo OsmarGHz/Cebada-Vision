@@ -61,7 +61,8 @@ Pages. No necesita backend ni variables de entorno.
    (`reports/anexos_final.md`) en PDF, enlace a la app y video.
 2. Preparar el paquete indicado en `reports/QUE_ENTREGAR_Y_COMO.md`: informe, bibliografía,
    anexos, enlaces verificados y `reports/entrega/CebadaVision_prediccion.csv`, copia idéntica
-   del original. Cotejar la copia con la plantilla de FIRA; conservar los originales sin cambios.
+   del original. Los 59 IDs y su orden ya coinciden con el CSV original del dataset;
+   conservar los originales sin cambios y repetir el cotejo si se regenera la salida.
    El envío por correo queda a cargo del equipo antes del 19 oct 23:59.
 3. Completar los prompts reales y aprobar aportaciones antes de entregar. Revisar las reservas
    técnicas y documentales en `reports/REVISION_DOCUMENTAL_2026-10-18.md`.
