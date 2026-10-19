@@ -53,21 +53,23 @@ En empate técnico del modelo, la presentación decide 1.º, 2.º y 3.er lugar.
 |---|---|
 | Introducción | 400–550 palabras |
 | Justificación | 100–200 palabras |
-| Objetivos | 200 palabras |
+| Objetivos | máx. 200 palabras |
 | Metodología | 600–700 palabras |
-| Resultados y discusión | 800 palabras |
-| Uso de la ciencia de datos en la inclusión financiera del sector agro | 300 palabras |
-| Conclusiones | 400 palabras |
+| Resultados y discusión | máx. 800 palabras |
+| Uso de la ciencia de datos en la inclusión financiera del sector agro | máx. 300 palabras |
+| Conclusiones | máx. 400 palabras |
 | Bibliografía | — |
-| Anexos | máx. 4 cuartillas (el PDF de bases dice 2, pero FIRA confirmó en la sesión de dudas del 27-sep que el límite real es 4 — para dejar espacio a la tabla de predicciones) |
+| Anexos | máx. 4 cuartillas (guía de registro, p. 4, y recordatorio del 14-oct; precisan el límite anterior de las bases) |
 
-Los anexos deben incluir las **actividades y aportaciones de cada integrante**, los **prompts de
-IA** utilizados, y (si se usa) la liga a repositorio/notebook (opcional, no obligatorio).
+Los anexos incluyen la tabla obligatoria de IDs y predicciones, las **actividades y aportaciones
+de cada integrante** y los enlaces. Los **prompts reales, su propósito y la herramienta de IA**
+van en Bibliografía (guía de registro, p. 4); A4 remite a ese registro pendiente.
 
 **Entrega adicional por correo (no está en el PDF de bases):** antes del cierre (19 oct) hay que
 mandar a innovacion@fira.gob.mx un **CSV con el rendimiento predicho de las 59 parcelas**, aparte
-de subir la solución a la plataforma. FIRA manda plantilla/recordatorio por correo. El código
-fuente también puede mandarse como adjunto en ese mismo correo (GitHub no es obligatorio).
+de subir la solución a la plataforma. El correo del 16-oct pide además informe, bibliografía
+y anexos en PDF separados, y enlace accesible a la aplicación, herramienta o dashboard.
+Los enlaces al código o repositorios son complementarios. Ver `reports/QUE_ENTREGAR_Y_COMO.md`.
 
 ### b) Aplicación o interfaz
 
@@ -95,8 +97,8 @@ Nota: la página web indica 10 nov como "anuncio de finalistas"; el PDF de bases
 
 ## Reglas importantes
 
-- **Uso de IA permitido** siempre que se indique dónde se usó y se **anexen los prompts** en el
-  escrito.
+- **Uso de IA permitido** con registro transparente de prompts reales, propósito y herramienta
+  en el PDF de Bibliografía (guía, p. 4), además de citar las fuentes utilizadas.
 - Equipos de 3 a 5 estudiantes de licenciatura con inscripción vigente en universidades de
   Hidalgo, Tlaxcala o Puebla.
 - Causas de descalificación: información falsa o que no sea de autoría propia, no entregar
@@ -127,25 +129,29 @@ Nota: la página web indica 10 nov como "anuncio de finalistas"; el PDF de bases
 - **App:** prioridad productor (FIRA, sesión 2): nota en lenguaje llano de cómo se llegó al número. Mapa de parcelas, predicción con intervalo de incertidumbre, explicación por parcela
   y enfoque de riesgo crediticio / inclusión financiera.
 
-## Dudas por resolver con el comité
+## Precisiones de los originales de FIRA y datos aún no disponibles
 
-- Métrica exacta del ranking y cómo se combinan RMSE, MAE y R² (RMSE confirmado como primer
-  filtro; ponderación exacta con metodología y app aún no detallada).
-- Formato del archivo de predicciones: ya se sabe (sesión 2) — un número por parcela, máx. 4 decimales, 59 filas (equipo + ID + t/ha), sin intervalos; plantilla llega por correo. Sin ponderar por superficie.
-- Fechas exactas de siembra/cosecha (ciclo: todo temporal; siembra típica 1 may–15 jun; FIRA podría dar fecha de algunas parcelas). Desconocidos: rotación, siniestros, dosis, variedad.
-- Coordenadas: ¿centroide o polígono?
-- ¿La app debe estar desplegada en línea o basta ejecución local?
-- Fórmulas exactas de cálculo de cada índice espectral y cómo se excluyen píxeles con nubes/
-  sombras (pendiente que FIRA mande por correo; hay valores negativos de índices con nubosidad
-  0% sin explicar aún).
+- Evaluación por parcela, sin ponderar por superficie, con RMSE, MAE y R²; no se especifica
+  cómo se combinan (preguntas adicionales, p. 1, pregunta 2).
+- Predicción puntual en t/ha con **cuatro decimales**, exactamente 59 parcelas y sus IDs
+  originales. Nombre `nombre_del_equipo_prediccion.csv`. Los adjuntos no incluyen una tabla
+  original de los 59 IDs ni un encabezado CSV obligatorio para cotejo independiente.
+- Sin fechas exactas de siembra/cosecha por parcela; referencia general de siembra a inicios
+  de mayo. Sin rotación, siniestros o dosis por parcela. Josefa predomina y Voyager aparece en
+  menor proporción, sin identificación por parcela (segunda sesión, preguntas 2, 4, 10, 12 y 14).
+- La delimitación combina puntos de campo, reporte del productor, proveedores externos y
+  validación satelital (segunda sesión, pregunta 11).
+- Las ecuaciones de índices ya están disponibles en el PDF adjunto al correo del 21-sep.
+  El proyecto usa los índices suministrados; esta revisión no los recalcula desde bandas crudas.
+- La app debe ser accesible al jurado (correo del 16-oct); aún falta verificar su URL pública.
 
 ## Hechos clave del dataset
 
 - Rendimiento = ciclo **abr–oct 2025** únicamente; datos 2022–2024 solo como historial.
-- Rendimiento = **grano** (no forraje), t/ha. Origen aclarado para esta revisión: **pesaje en báscula de la cosecha de cada parcela, sin ajustes por humedad, impurezas o mermas**. El reporte por comercializadora/parafinanciera no implica ausencia de medición. Ver trazabilidad y documentos originales pendientes en `reports/REVISION_DOCUMENTAL_2026-10-18.md`.
-- Todas las parcelas son de **temporal** (sin riego) — confirmado por FIRA (27-sep).
-- Partición 70/30 entrenamiento/predicción es **estratificada por zona geográfica**, no aleatoria
-  pura — cada una de las 3 zonas está representada en ambos conjuntos.
+- Rendimiento = **grano** (no forraje), t/ha. Origen aclarado para esta revisión: **pesaje en báscula de la cosecha de cada parcela, sin ajustes por humedad, impurezas o mermas**. El reporte por comercializadora/parafinanciera no implica ausencia de medición. Ver trazabilidad y originales cotejados en `reports/REVISION_DOCUMENTAL_2026-10-18.md`.
+- Todas las parcelas son de **temporal** (sin riego) — confirmado por el correo del 21-sep y la segunda sesión (9-oct).
+- Partición oficial 70/30 (138/59) mediante **muestreo aleatorio estratificado**; los documentos
+  no detallan los estratos. La CV por estado es una elección del equipo, documentada en el código.
 - Shapefile: campo ID truncado a `ID_POLIGON` → renombrar a `ID_POLIGONO`. Los `.shp` vienen
   siempre acompañados de `.dbf`/`.prj`/`.shx`/`.cpg` en la misma carpeta (abrir solo el `.shp` en
   QGIS, arrastra el resto automático).

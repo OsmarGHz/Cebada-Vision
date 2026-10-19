@@ -101,7 +101,7 @@ coordenadas del centroide (km), la zona (k-means de tres grupos sobre los centro
 rendimiento), el rendimiento promedio de la zona y el promedio ponderado por distancia del
 rendimiento de las ocho parcelas de entrenamiento más cercanas.
 
-**Validación.** La métrica principal es el RMSE (criterio de FIRA), con MAE y R². Se usó
+**Validación.** El equipo prioriza RMSE, junto con MAE y R², considerados por FIRA. Se usó
 validación cruzada de 5 particiones estratificadas por estado —mantiene representación estatal, con proporción 80/20 por partición— repetida 10 veces; se
 reporta promedio y desviación entre repeticiones, y diferencias de RMSE menores a 0.03 t/ha se interpretan con cautela, sin prueba de significancia. Como prueba más exigente se añadió una validación agrupada por municipio.
 Las variables de vecinos y zona se recalculan dentro de cada partición usando únicamente
@@ -257,6 +257,14 @@ a decisiones financieras requieren validación temporal y operativa adicional.
   https://doi.org/10.1051/bioconf/20236801013
 - FIRA (2026). *Bases del Reto AgroCebada 2026*. Fideicomisos Instituidos en Relación con la
   Agricultura. https://www.fira.gob.mx/Nd/Convocatoria-2026.html
+- FIRA (2026). *Ecuaciones de los índices de vegetación, Reto AgroCebada 2026*.
+  Documento técnico proporcionado por el Comité Organizador, pp. 1–2.
+- FIRA (2026). *Lineamientos y Guía de Registro de Proyectos, Reto AgroCebada FIRA 2026*.
+  Guía proporcionada a los equipos, pp. 2–4.
+- FIRA (2026). *Preguntas y respuestas adicionales*. Documento de apoyo para integrantes
+  del jurado, pp. 1–3; preguntas 1–8.
+- FIRA (2026, 9 de octubre). *Segunda sesión de preguntas y respuestas*.
+  Documento de apoyo para integrantes del jurado, pp. 1–2.
 - Funk, C., Peterson, P., Landsfeld, M., et al. (2015). The climate hazards infrared precipitation
   with stations—a new environmental record for monitoring extremes. *Scientific Data*, 2, 150066.
 - Huete, A., Didan, K., Miura, T., Rodriguez, E. P., Gao, X. y Ferreira, L. G. (2002). Overview of the
@@ -277,9 +285,20 @@ a decisiones financieras requieren validación temporal y operativa adicional.
 - van Klompenburg, T., Kassahun, A. y Catal, C. (2020). Crop yield prediction using machine learning:
   A systematic literature review. *Computers and Electronics in Agriculture*, 177, 105709.
 
+### Uso de inteligencia artificial generativa — pendiente de completar
+
+La guía de registro de FIRA (p. 4, apartado Bibliografía) solicita los prompts utilizados,
+el propósito de cada uno y la herramienta empleada. Esta relación no sustituye las referencias
+bibliográficas, técnicas o de datos.
+
+Falta incorporar los registros reales de cada integrante, con el texto de cada prompt,
+su propósito y la herramienta utilizada; indicar también el integrante y la actividad o archivo
+correspondiente para facilitar su revisión. No se han reconstruido ni inventado registros.
+Este apartado debe completarse y aprobarse antes de entregar el PDF de Bibliografía.
+
 ## Anexos (máx. 4 cuartillas; ver `reports/anexos_final.md`)
 
 1. Tabla de predicciones de las 59 parcelas (ID_POLIGONO, rendimiento predicho t/ha).
 2. Actividades y aportaciones de cada integrante.
 3. Enlaces al repositorio y a la aplicación.
-4. Declaración de uso de IA y prompts reales (pendientes de integrar).
+4. Referencia al registro de uso de IA en Bibliografía (pendiente de integrar).

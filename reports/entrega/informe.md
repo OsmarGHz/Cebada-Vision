@@ -101,7 +101,7 @@ coordenadas del centroide (km), la zona (k-means de tres grupos sobre los centro
 rendimiento), el rendimiento promedio de la zona y el promedio ponderado por distancia del
 rendimiento de las ocho parcelas de entrenamiento más cercanas.
 
-**Validación.** La métrica principal es el RMSE (criterio de FIRA), con MAE y R². Se usó
+**Validación.** El equipo prioriza RMSE, junto con MAE y R², considerados por FIRA. Se usó
 validación cruzada de 5 particiones estratificadas por estado —mantiene representación estatal, con proporción 80/20 por partición— repetida 10 veces; se
 reporta promedio y desviación entre repeticiones, y diferencias de RMSE menores a 0.03 t/ha se interpretan con cautela, sin prueba de significancia. Como prueba más exigente se añadió una validación agrupada por municipio.
 Las variables de vecinos y zona se recalculan dentro de cada partición usando únicamente

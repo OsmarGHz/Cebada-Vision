@@ -10,6 +10,14 @@ CebadaVision · Reto AgroCebada 2026 (FIRA)
   https://doi.org/10.1051/bioconf/20236801013
 - FIRA (2026). *Bases del Reto AgroCebada 2026*. Fideicomisos Instituidos en Relación con la
   Agricultura. https://www.fira.gob.mx/Nd/Convocatoria-2026.html
+- FIRA (2026). *Ecuaciones de los índices de vegetación, Reto AgroCebada 2026*.
+  Documento técnico proporcionado por el Comité Organizador, pp. 1–2.
+- FIRA (2026). *Lineamientos y Guía de Registro de Proyectos, Reto AgroCebada FIRA 2026*.
+  Guía proporcionada a los equipos, pp. 2–4.
+- FIRA (2026). *Preguntas y respuestas adicionales*. Documento de apoyo para integrantes
+  del jurado, pp. 1–3; preguntas 1–8.
+- FIRA (2026, 9 de octubre). *Segunda sesión de preguntas y respuestas*.
+  Documento de apoyo para integrantes del jurado, pp. 1–2.
 - Funk, C., Peterson, P., Landsfeld, M., et al. (2015). The climate hazards infrared precipitation
   with stations—a new environmental record for monitoring extremes. *Scientific Data*, 2, 150066.
 - Huete, A., Didan, K., Miura, T., Rodriguez, E. P., Gao, X. y Ferreira, L. G. (2002). Overview of the
@@ -29,3 +37,14 @@ CebadaVision · Reto AgroCebada 2026 (FIRA)
   Secretaría de Agricultura y Desarrollo Rural. https://www.gob.mx/siap
 - van Klompenburg, T., Kassahun, A. y Catal, C. (2020). Crop yield prediction using machine learning:
   A systematic literature review. *Computers and Electronics in Agriculture*, 177, 105709.
+
+## Uso de inteligencia artificial generativa — pendiente de completar
+
+La guía de registro de FIRA (p. 4, apartado Bibliografía) solicita los prompts utilizados,
+el propósito de cada uno y la herramienta empleada. Esta relación no sustituye las referencias
+bibliográficas, técnicas o de datos.
+
+Falta incorporar los registros reales de cada integrante, con el texto de cada prompt,
+su propósito y la herramienta utilizada; indicar también el integrante y la actividad o archivo
+correspondiente para facilitar su revisión. No se han reconstruido ni inventado registros.
+Este apartado debe completarse y aprobarse antes de entregar el PDF de Bibliografía.

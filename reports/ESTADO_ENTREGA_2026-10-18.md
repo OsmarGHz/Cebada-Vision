@@ -42,7 +42,7 @@ Scripts: `src/features.py` → `src/modelar.py` → `src/modelo_final.py` → `s
 Nota: `particiones_cv.csv` y `validacion_cv.py` originales no están en ningún branch; los folds
 se generan con `RepeatedStratifiedKFold(5, 10, random_state=42)` sobre Estado (V0 da 0.851 igual).
 
-## 2. App (30 %) — lista, falta desplegar
+## 2. App (30 %) — estado previo y discrepancias pendientes
 
 - Datos del modelo final en `agrocebada-pagina/public/data/` (`parcelas.geojson`, `modelo.json`,
   `series.json`, `predicciones.csv`). `npm run validate` ✓, 24/24 pruebas ✓, `npm run build` ✓.
@@ -53,6 +53,9 @@ se generan con `RepeatedStratifiedKFold(5, 10, random_state=42)` sobre Estado (V
 - Simulador: Ridge sustituta (RMSE de ajuste frente al ensamble 0.3161 t/ha sobre las mismas
   197 parcelas). Mapa y ficha muestran predicciones precalculadas del ensamble. La sustituta
   no tiene validación independiente contra rendimientos reales ni interpretación causal.
+- Cotejo del código actual (`d77d4852f1b0ed7256428cbb22e188be68dcbbfd`): persisten
+  «sin medición instrumental», etiquetas de intervalo al 80 % y kNN 0.506; el simulador
+  necesita distinguir Ridge del ensamble. Ver el detalle en la revisión documental.
 - **No verificado visualmente** (Chrome no abrió localhost desde la automatización). Revisar con
   `npm run preview` antes de desplegar.
 
@@ -66,7 +69,7 @@ se generan con `RepeatedStratifiedKFold(5, 10, random_state=42)` sobre Estado (V
 | `reports/experimentos.md` | Banco completo de experimentos (10 repeticiones). |
 | `DECISIONES.md` | Entrada del 17 oct con todas las decisiones de cierre. |
 
-Bibliografía: solo referencias verificables. Se descartó Arizo-García et al. (no localizada).
+Bibliografía: referencias y documentos técnicos de FIRA cotejados; pendiente integrar los prompts reales, su propósito y herramienta conforme a la guía (p. 4). Se descartó Arizo-García et al. (no localizada).
 
 ## 4. Pendiente del equipo (no automatizable)
 
@@ -76,7 +79,7 @@ Bibliografía: solo referencias verificables. Se descartó Arizo-García et al. 
 | 2 | Poner la URL en la plataforma y en `src/generar_anexos.py "URL_APP" "URL_VIDEO"` → regenera `anexos_final.md` | Osmar | #14 |
 | 3 | Grabar el video con `reports/guion_video.md`, subir con acceso por enlace | Isaac + Cervantes | #15 |
 | 4 | Cada integrante revisa y aprueba su fila en `reports/anexos.md` (sección A2) | Todos | #10 |
-| 5 | Integrar herramientas, usos y prompts reales de IA en A4; verificar cuatro cuartillas | Todos | — |
+| 5 | Integrar prompts reales, propósito y herramienta en Bibliografía; A4 remite a ese registro | Todos | — |
 | 6 | Pegar el reporte sección por sección en la plataforma; subir Bibliografía y Anexos en PDF; verificar enlaces en azul | Osmar | — |
 | 7 | **Correo a innovacion@fira.gob.mx** con el CSV de 59 predicciones + código (zip del repo o liga) antes del 19 oct 23:59 | Osmar | — |
 | 8 | Borrar el comentario "sex" en la issue #11 y cerrar #11, #12 (poner respuesta a preguntas guía), #5, #8 | Osmar / Boni | — |

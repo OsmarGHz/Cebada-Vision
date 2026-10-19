@@ -30,7 +30,6 @@ Relación pendiente de revisión y aprobación por cada integrante.
 
 ## A4. Uso de inteligencia artificial
 
-Pendiente de integrar los registros reales del equipo: integrante, herramienta utilizada,
-actividad o archivo donde se usó, y texto de los prompts efectivamente enviados. No se han
-reconstruido ni inventado prompts. Esta sección debe completarse antes de la entrega y comprobarse
-que los anexos respetan el límite de cuatro cuartillas indicado en las aclaraciones del reto.
+El registro de prompts reales, su propósito y la herramienta utilizada debe incorporarse en
+Bibliografía, conforme a la guía de FIRA (p. 4). Sigue pendiente de integración y aprobación
+por el equipo en `reports/entrega/bibliografia.md`. No se han inventado registros de uso.
