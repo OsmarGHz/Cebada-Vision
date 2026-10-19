@@ -1,5 +1,15 @@
 # Notas — Sesión de preguntas y respuestas con FIRA (2026-09-27)
 
+> Nota de revisión del 18 oct 2026: se conserva abajo el resumen histórico de las sesiones.
+> Las frases «sin medición instrumental» quedaron superadas por la aclaración de pesaje en
+> báscula de la cosecha de cada parcela, sin ajustes por humedad, impurezas o mermas.
+> No utilizarlas como descripción vigente. El cotejo directo de los nueve adjuntos consta en
+> `REVISION_DOCUMENTAL_2026-10-18.md`: acuerdos por correo del 21-sep y segunda sesión del 9-oct.
+> Los originales especifican cuatro decimales, muestreo aleatorio estratificado sin detallar
+> estratos, variedades Josefa/Voyager sin asignación por parcela y ecuaciones ya proporcionadas.
+> Las fechas y pendientes de las notas históricas siguientes no son la referencia vigente.
+
+
 Resumen de puntos **nuevos o que aclaran/contradicen** lo que ya sabíamos, extraídos de la
 transcripción de la sesión de dudas con Pablo Iván Argueta, Maye Rodríguez y Angi Fermoso (FIRA).
 No repite lo que ya está en `CLAUDE.md`.
